@@ -17,23 +17,16 @@ namespace Store.Controllers
 
         public ActionResult Product()
         {
-            var dbList = new dbStoreEntities();
-            return View(dbList.tProducts);
+            var ProductList = new dbStoreEntities().tProducts.ToList();
+            return View(ProductList);
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        public ActionResult Register()
-        {
-            return View();
-        }
+ 
 
         public ActionResult Cart()
         {
-            return View();
+            var CartList = new dbStoreEntities().tCart.ToList();
+            return View(CartList);
         }
     }
 }

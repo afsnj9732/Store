@@ -128,8 +128,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\ValidateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,7 +148,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbStore.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductService.cs" />
+    <Compile Include="Models\dbService.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
@@ -228,12 +228,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Main\Product.cshtml" />
-    <Content Include="Views\Main\Register.cshtml" />
+    <Content Include="Views\Main\Cart.cshtml" />
+    <Content Include="Views\Validate\Login.cshtml" />
+    <Content Include="Views\Validate\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

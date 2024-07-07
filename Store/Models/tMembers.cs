@@ -11,7 +11,9 @@ namespace Store.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tMembers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +21,17 @@ namespace Store.Models
         {
             this.tCart = new HashSet<tCart>();
         }
-    
+        
         public int MemberID { get; set; }
+        [DisplayName("使用者名稱")]
+        [Required]
         public string UserName { get; set; }
+        [DisplayName("密碼")]
+        [Required]
         public string Password { get; set; }
+        [DisplayName("Email")]
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
