@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Store.Controllers
 {
+
     public class ValidateController : Controller
     {
         // GET: Validate
@@ -16,14 +18,14 @@ namespace Store.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(tMembers memberInfo)
+        public ActionResult Login(LoginModel memberInfo)
         {
             if (ModelState.IsValid)
             {
                 dbService dbService = new dbService();
                 if (dbService.CheckMember(memberInfo))
                 {
-                    //Session["Customer"]= memberInfo.UserName;
+                    FormsAuthentication.RedirectFromLoginPage(memberInfo.Email, true);
                     return RedirectToAction("Index", "Main");
                 }
                 else
@@ -44,6 +46,12 @@ namespace Store.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
         [HttpPost]
         public ActionResult Register(tMembers memberInfo)
         {

@@ -20,7 +20,16 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("首頁", "Index", "Main", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("商品", "Product", "Main", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("登入", "Login", "Validate", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("登出", "Logout", "Validate", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("登入", "Login", "Validate", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+
                 </ul>
             </div>
         </div>

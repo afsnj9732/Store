@@ -16,7 +16,7 @@ namespace Store.Models
             db.SaveChanges();
         }
 
-        public Boolean CheckMember(tMembers memberInfo)
+        public Boolean CheckMember(LoginModel memberInfo)
         {
             var ifExist = (from member in db.tMembers
                     where memberInfo.Email == member.Email &&

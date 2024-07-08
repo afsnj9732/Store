@@ -149,6 +149,7 @@
       <DependentUpon>dbStore.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\dbService.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
@@ -224,7 +225,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -233,6 +233,7 @@
     <Content Include="Views\Main\Cart.cshtml" />
     <Content Include="Views\Validate\Login.cshtml" />
     <Content Include="Views\Validate\Register.cshtml" />
+    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
