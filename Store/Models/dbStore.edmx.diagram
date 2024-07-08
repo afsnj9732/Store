@@ -4,13 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="075a2f33033f4ba788646b65415b1c80" Name="Diagram1">
-        <EntityTypeShape EntityType="dbStoreModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbStoreModel.tCart" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbStoreModel.tMembers" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbStoreModel.tProducts" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="c36f58144a4b4219a4c59c8b838bc72b" Name="Diagram1">
+        <EntityTypeShape EntityType="dbStoreModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbStoreModel.tCart" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbStoreModel.tCartItem" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbStoreModel.tMembers" Width="1.5" PointX="1.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbStoreModel.tOrder" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbStoreModel.tOrderItem" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbStoreModel.tProducts" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="dbStoreModel.FK_Cart_Members" ManuallyRouted="false" />
-        <AssociationConnector Association="dbStoreModel.FK_Cart_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="dbStoreModel.FK_tCartItem_tCart" ManuallyRouted="false" />
+        <AssociationConnector Association="dbStoreModel.FK_tCartItem_tProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="dbStoreModel.FK_tOrder_tMembers" ManuallyRouted="false" />
+        <AssociationConnector Association="dbStoreModel.FK_tOrderItem_tOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="dbStoreModel.FK_tOrderItem_tProducts" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

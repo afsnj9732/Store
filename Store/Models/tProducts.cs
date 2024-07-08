@@ -17,17 +17,18 @@ namespace Store.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tProducts()
         {
-            this.tCart = new HashSet<tCart>();
+            this.tCartItem = new HashSet<tCartItem>();
+            this.tOrderItem = new HashSet<tOrderItem>();
         }
     
         public int ProductID { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
         public int Price { get; set; }
-        public string Category { get; set; }
         public string ImageURL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tCart> tCart { get; set; }
+        public virtual ICollection<tCartItem> tCartItem { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tOrderItem> tOrderItem { get; set; }
     }
 }

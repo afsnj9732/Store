@@ -129,10 +129,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Controllers\ValidateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\dbService.cs" />
     <Compile Include="Models\dbStore.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,7 +150,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbStore.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbService.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>dbStore.tt</DependentUpon>
@@ -156,7 +157,16 @@
     <Compile Include="Models\tCart.cs">
       <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tCartItem.cs">
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tMembers.cs">
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tOrder.cs">
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tOrderItem.cs">
       <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProducts.cs">
@@ -230,13 +240,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Main\Product.cshtml" />
-    <Content Include="Views\Main\Cart.cshtml" />
     <Content Include="Views\Validate\Login.cshtml" />
     <Content Include="Views\Validate\Register.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shopping\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -12,19 +12,14 @@ namespace Store.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tCart
+    public partial class tCartItem
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tCart()
-        {
-            this.tCartItem = new HashSet<tCartItem>();
-        }
-    
+        public int CartItemID { get; set; }
         public int CartID { get; set; }
-        public int MemberID { get; set; }
+        public int ProductID { get; set; }
+        public int Quantity { get; set; }
     
-        public virtual tMembers tMembers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tCartItem> tCartItem { get; set; }
+        public virtual tCart tCart { get; set; }
+        public virtual tProducts tProducts { get; set; }
     }
 }

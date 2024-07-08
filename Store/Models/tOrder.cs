@@ -11,33 +11,22 @@ namespace Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class tMembers
+    
+    public partial class tOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tMembers()
+        public tOrder()
         {
-            this.tCart = new HashSet<tCart>();
-            this.tOrder = new HashSet<tOrder>();
+            this.tOrderItem = new HashSet<tOrderItem>();
         }
     
+        public int OrderID { get; set; }
         public int MemberID { get; set; }
-        [DisplayName("姓名")]
-        [Required]
-        public string UserName { get; set; }
-        [DisplayName("密碼")]
-        [Required]
-        public string Password { get; set; }
-        [DisplayName("Email")]
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        public int TotalPrice { get; set; }
+        public System.DateTime OrderDate { get; set; }
     
+        public virtual tMembers tMembers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tCart> tCart { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tOrder> tOrder { get; set; }
+        public virtual ICollection<tOrderItem> tOrderItem { get; set; }
     }
 }

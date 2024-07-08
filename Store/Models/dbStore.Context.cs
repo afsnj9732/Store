@@ -27,7 +27,10 @@ namespace Store.Models
     
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tCart> tCart { get; set; }
+        public virtual DbSet<tCartItem> tCartItem { get; set; }
         public virtual DbSet<tMembers> tMembers { get; set; }
+        public virtual DbSet<tOrder> tOrder { get; set; }
+        public virtual DbSet<tOrderItem> tOrderItem { get; set; }
         public virtual DbSet<tProducts> tProducts { get; set; }
     }
 }

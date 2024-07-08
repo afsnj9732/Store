@@ -23,10 +23,6 @@ namespace Store.Controllers
 
  
 
-        public ActionResult Cart()
-        {
-            var CartList = new dbStoreEntities().tCart.ToList();
-            return View(CartList);
-        }
+
     }
 }
