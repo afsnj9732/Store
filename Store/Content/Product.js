@@ -1,13 +1,21 @@
 ﻿document.getElementById("addCart").addEventListener("click", function () {
     var data = { productID: document.getElementById("addCart").getAttribute("data-productID") }
     url = "../Shopping/AddCart"
-    fetch(url, {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    }
+    fetch(url,
+        {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }
     )
-        .then(Response => { console.log("ajax成功") })
-        .catch(Error => { console.error("ajax失敗") })
+        .then(Response => {
+            return Response.json().catch();
+        })
+        .then(data => {
+            if (data.ajaxStatus == 401) {
+                window.location.href = '../Validate/Login'
+            }
+        })
+        .catch(Error => { //使用者擁有授權 })
 
 })
