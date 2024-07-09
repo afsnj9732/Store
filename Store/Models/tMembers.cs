@@ -11,9 +11,7 @@ namespace Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tMembers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,15 +22,8 @@ namespace Store.Models
         }
     
         public int MemberID { get; set; }
-        [DisplayName("姓名")]
-        [Required]
         public string UserName { get; set; }
-        [DisplayName("密碼")]
-        [Required]
         public string Password { get; set; }
-        [DisplayName("Email")]
-        [Required]
-        [EmailAddress]
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

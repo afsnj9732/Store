@@ -20,17 +20,18 @@ namespace Store.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel memberInfo)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //資料驗證
             {
                 dbService dbService = new dbService();
                 if (dbService.CheckMember(memberInfo))
                 {
-                    FormsAuthentication.RedirectFromLoginPage(memberInfo.Email, true);
+                    Session["memberID"] = dbService.GetMemberID(memberInfo);
+                    FormsAuthentication.RedirectFromLoginPage(memberInfo.Email, true);//授權
                     return RedirectToAction("Index", "Main");
                 }
                 else
                 {
-                    ViewBag.MemberInfo = "不存在的帳號密碼";
+                    //ViewBag.MemberInfo = "不存在的帳號密碼";
                     return View();
                 }
             }
