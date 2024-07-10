@@ -46,8 +46,8 @@ namespace Store.Models
                 db.tCart.Add(newCart);
                 db.SaveChanges();
             }
-            else
-            {
+            
+            
                 //如果商品已經存在登入會員的購物車內
                 //找到所屬購物車ID，並比對商品ID
                 tCartItem target = db.tCartItem.Where(m => m.CartID == memberCart.CartID && m.ProductID == addProductID).FirstOrDefault();
@@ -66,7 +66,7 @@ namespace Store.Models
                     target.Quantity += 1;
                     db.SaveChanges();
                 }
-            }
+            
         }
 
 

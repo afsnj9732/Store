@@ -1,5 +1,7 @@
-﻿document.getElementById("addCart").addEventListener("click", function () {
-    var data = { productID: document.getElementById("addCart").getAttribute("data-productID") }
+﻿//document.getElementById("addCart").addEventListener("click", function () {
+function AddCart(listID) {
+    //var data = { productID: this.getAttribute("data-productID") }
+    var data = { productID: listID }
     url = "../Shopping/AddCart"
     fetch(url,
         {
@@ -14,8 +16,10 @@
         .then(data => {
             if (data.ajaxStatus == 401) {
                 window.location.href = '../Validate/Login'
+            } else {
+                alert("購物車添加成功")
             }
         })
-        //.catch(Error => { )
-
-})
+    //.catch(Error => { )
+}
+//})
