@@ -9,13 +9,13 @@
         }
     )
         .then(Response => {
-            return Response.json().catch();
+            return Response.json();
         })
         .then(data => {
             if (data.ajaxStatus == 401) {
                 window.location.href = '../Validate/Login'
             }
         })
-        .catch(Error => { //使用者擁有授權 })
+        //.catch(Error => { )
 
 })

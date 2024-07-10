@@ -29,7 +29,7 @@ namespace Store.Controllers
                 dbService dbService = new dbService();
                 int loginMemberID = Convert.ToInt32(Session["memberID"]);
                 dbService.AddCartItem(loginMemberID, Convert.ToInt32(productID));
-                return null;
+                return Json(new {});
             }
 
         }
