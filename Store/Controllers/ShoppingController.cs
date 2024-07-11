@@ -37,9 +37,13 @@ namespace Store.Controllers
 
         }
 
-        public ActionResult DeleteCart() 
+        [HttpGet]
+        [Authorize]
+        public ActionResult DeleteCart(int CartItemID) 
         {
-            return View();
+            dbService dbService= new dbService();
+            dbService.DeleteCartItem(CartItemID);
+            return RedirectToAction("CartItemList");
         }
 
         public ActionResult OrderList()

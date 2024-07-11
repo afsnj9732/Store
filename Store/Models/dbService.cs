@@ -79,6 +79,7 @@ namespace Store.Models
             foreach(tCartItem item in targetCartList)
             {
                 ShoppingCartViewModel cart = new ShoppingCartViewModel();
+                cart.CartItemID = item.CartItemID;
                 cart.ProductName = item.tProducts.Name;//利用關聯查詢
                 cart.UnitPrice = item.tProducts.Price;
                 cart.Quantity = item.Quantity;
@@ -89,5 +90,11 @@ namespace Store.Models
             return cartItemList;
         }
 
+        public void DeleteCartItem(int CartItemID)
+        {
+            var target = db.tCartItem.Where(m => m.CartItemID == CartItemID).FirstOrDefault();
+            db.tCartItem.Remove(target);
+            db.SaveChanges();
+        }
     }
 }

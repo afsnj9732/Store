@@ -26,7 +26,7 @@
         <td>
             @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
             @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("刪除", "DeleteCart", new { CartItemID = item.CartItemID })
         </td>
     </tr>
 }
