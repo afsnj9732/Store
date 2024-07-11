@@ -11,9 +11,12 @@ namespace Store.Controllers
     {
         // GET: Shopping
 
-        public ActionResult CartList()
+        [Authorize]
+        public ActionResult CartItemList()
         {
-            return View();
+            int memberID = Convert.ToInt32(Session["memberID"]);
+            dbService dbService = new dbService();
+            return View(dbService.MemberShoppingCart(memberID));
         }
         
         [HttpPost]

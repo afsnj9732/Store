@@ -70,7 +70,24 @@ namespace Store.Models
         }
 
 
+        public List<ShoppingCartViewModel> MemberShoppingCart(int memberID)
+        {
+            List<ShoppingCartViewModel> cartItemList = new List<ShoppingCartViewModel>();
+            tCart targetCart = db.tCart.Where(m=>m.MemberID == memberID).FirstOrDefault();
+            //利用會員ID找出購物車
+            List<tCartItem> targetCartList = db.tCartItem.Where(m=>m.CartID==targetCart.CartID).ToList();
+            foreach(tCartItem item in targetCartList)
+            {
+                ShoppingCartViewModel cart = new ShoppingCartViewModel();
+                cart.ProductName = item.tProducts.Name;//利用關聯查詢
+                cart.UnitPrice = item.tProducts.Price;
+                cart.Quantity = item.Quantity;
+                cart.TotalPrice = cart.UnitPrice*cart.Quantity;
+                cartItemList.Add(cart);
+            }
 
+            return cartItemList;
+        }
 
     }
 }

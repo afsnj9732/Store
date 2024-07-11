@@ -23,6 +23,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("登出", "Logout", "Validate", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("購物車", "CartItemList", "Shopping", new { area = "" }, new { @class = "nav-link" })</li>
 
                     }
                     else
