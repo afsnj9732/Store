@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Store.Models.ShoppingCartViewModel>
-
 @{
     ViewBag.Title = "CartItemList";
+    int Price = 0;
 }
 
 <h2>CartItemList</h2>
@@ -9,26 +9,30 @@
 
 <table class="table">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPrice)
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-            @Html.ActionLink("刪除", "DeleteCart", new { CartItemID = item.CartItemID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        Price += item.TotalPrice;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("刪除", "DeleteCart", new { CartItemID = item.CartItemID })
+            </td>
+        </tr>
+    }
 
 </table>
+總價:@Price
+@*@Html.ActionLink("訂購", "DeleteCart", new { CartItemID = item.CartItemID })*@

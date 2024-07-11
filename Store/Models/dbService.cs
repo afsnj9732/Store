@@ -96,5 +96,10 @@ namespace Store.Models
             db.tCartItem.Remove(target);
             db.SaveChanges();
         }
+        public List<tOrder> TakeOrderList(int memberID)
+        {
+            return db.tOrder.Where(m=>m.MemberID==memberID).ToList();
+
+        }
     }
 }

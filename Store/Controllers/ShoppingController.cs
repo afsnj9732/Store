@@ -46,9 +46,12 @@ namespace Store.Controllers
             return RedirectToAction("CartItemList");
         }
 
+        [Authorize]
         public ActionResult OrderList()
         {
-            return View();
+            int memberID = Convert.ToInt32(Session["memberID"]);
+            dbService dbService = new dbService();            
+            return View(dbService.TakeOrderList(memberID));
         }
 
 
