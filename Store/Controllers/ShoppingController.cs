@@ -18,7 +18,7 @@ namespace Store.Controllers
             dbService dbService = new dbService();
             return View(dbService.MemberShoppingCart(memberID));
         }
-        
+        [Authorize]
         [HttpPost]
         public ActionResult AddCart(string productID)//ajax 發送的資料型態為字串
         {

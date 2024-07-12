@@ -28,7 +28,7 @@ namespace Store.Models
 
         }
 
-        //[Authorize] private
+        //[Authorize] 
         public int GetMemberID(LoginModel memberEmail)
         {
             var memberID = db.tMembers.Where(m => m.Email == memberEmail.Email).FirstOrDefault().MemberID;

@@ -18,6 +18,7 @@ namespace Store.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel memberInfo)
         {
             if (ModelState.IsValid) //資料驗證
@@ -42,10 +43,6 @@ namespace Store.Controllers
 
         }
 
-        public ActionResult Register()
-        {
-            return View();
-        }
 
         [Authorize]
         public ActionResult Logout()
@@ -53,7 +50,14 @@ namespace Store.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(tMembers memberInfo)
         {
             if (ModelState.IsValid)
