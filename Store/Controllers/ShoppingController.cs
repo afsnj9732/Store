@@ -18,7 +18,7 @@ namespace Store.Controllers
             dbService dbService = new dbService();
             return View(dbService.MemberShoppingCart(memberID));
         }
-        [Authorize]
+
         [HttpPost]
         public ActionResult AddCart(string productID)//ajax 發送的資料型態為字串
         {
@@ -32,7 +32,8 @@ namespace Store.Controllers
                 dbService dbService = new dbService();
                 int loginMemberID = Convert.ToInt32(Session["memberID"]);
                 dbService.AddCartItem(loginMemberID, Convert.ToInt32(productID));
-                return Json(new {});
+                
+                return Json(new { CartItemAmounts= dbService.TakeCartItemAmounts(loginMemberID) });
             }
 
         }

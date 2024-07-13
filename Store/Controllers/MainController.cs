@@ -12,7 +12,6 @@ namespace Store.Controllers
         // GET: Main
         public ActionResult Index()
         {
-            
             return View();
         }
 

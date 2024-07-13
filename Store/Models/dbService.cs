@@ -69,6 +69,12 @@ namespace Store.Models
             
         }
 
+        public int TakeCartItemAmounts(int loginMemberID)
+        {
+            var targetCart = db.tCart.Where(m=>m.MemberID == loginMemberID).FirstOrDefault();
+            var targetCollection = targetCart.tCartItem;
+            return targetCollection.Count;
+        }
 
         public List<ShoppingCartViewModel> MemberShoppingCart(int memberID)
         {
