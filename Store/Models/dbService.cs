@@ -80,7 +80,7 @@ namespace Store.Models
             {
                 ShoppingCartViewModel cart = new ShoppingCartViewModel();
                 cart.CartItemID = item.CartItemID;
-                cart.ProductName = item.tProducts.Name;//利用關聯查詢
+                cart.ProductName = item.tProducts.Name;//利用關聯，使用導航屬性查詢
                 cart.UnitPrice = item.tProducts.Price;
                 cart.Quantity = item.Quantity;
                 cart.TotalPrice = cart.UnitPrice*cart.Quantity;
