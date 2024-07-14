@@ -35,6 +35,17 @@ namespace Store.Models
             return memberID;
         }
 
+        public int GetCartItemQuantity(int loginMemberID)
+        {
+            var targetCart = db.tCart.Where(m => m.MemberID == loginMemberID).FirstOrDefault();
+            int targetItemQuantity = 0;
+            foreach(var item in targetCart.tCartItem)
+            {
+                targetItemQuantity+= item.Quantity;
+            }
+            return targetItemQuantity;
+        }
+
         public void AddCartItem(int loginMemberID,int addProductID)
         {
             tCart memberCart = db.tCart.Where(m => m.MemberID == loginMemberID).FirstOrDefault();
@@ -69,12 +80,7 @@ namespace Store.Models
             
         }
 
-        public int TakeCartItemAmounts(int loginMemberID)
-        {
-            var targetCart = db.tCart.Where(m=>m.MemberID == loginMemberID).FirstOrDefault();
-            var targetCollection = targetCart.tCartItem;
-            return targetCollection.Count;
-        }
+
 
         public List<ShoppingCartViewModel> MemberShoppingCart(int memberID)
         {
@@ -102,7 +108,7 @@ namespace Store.Models
             db.tCartItem.Remove(target);
             db.SaveChanges();
         }
-        public List<tOrder> TakeOrderList(int memberID)
+        public List<tOrder> GetOrderList(int memberID)
         {
             return db.tOrder.Where(m=>m.MemberID==memberID).ToList();
 

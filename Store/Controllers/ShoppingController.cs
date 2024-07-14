@@ -20,6 +20,24 @@ namespace Store.Controllers
         }
 
         [HttpPost]
+        public ActionResult GetCartItemQuantity()
+        {
+            if(!User.Identity.IsAuthenticated)
+            {
+                int ajaxStatusCode = new HttpUnauthorizedResult().StatusCode;
+                return Json(new { ajaxStatus = ajaxStatusCode });//回傳401，讓ajax跳轉到登入畫面
+            }
+            else
+            {
+                dbService dbService = new dbService();
+                int memberID = Convert.ToInt32(Session["memberID"]);
+                dbService.GetCartItemQuantity(memberID);
+                return Json(new { CartItemQuantity = dbService.GetCartItemQuantity(memberID) });
+
+            }
+        }
+
+        [HttpPost]
         public ActionResult AddCart(string productID)//ajax 發送的資料型態為字串
         {
             if (!User.Identity.IsAuthenticated)
@@ -32,8 +50,7 @@ namespace Store.Controllers
                 dbService dbService = new dbService();
                 int loginMemberID = Convert.ToInt32(Session["memberID"]);
                 dbService.AddCartItem(loginMemberID, Convert.ToInt32(productID));
-                
-                return Json(new { CartItemAmounts= dbService.TakeCartItemAmounts(loginMemberID) });
+                return Json(new { });
             }
 
         }
@@ -52,7 +69,7 @@ namespace Store.Controllers
         {
             int memberID = Convert.ToInt32(Session["memberID"]);
             dbService dbService = new dbService();            
-            return View(dbService.TakeOrderList(memberID));
+            return View(dbService.GetOrderList(memberID));
         }
 
 

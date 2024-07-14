@@ -18,11 +18,11 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    <button onclick="AddCart(@item.ProductID)" @*data-productID="@item.ProductID"*@>加入購物車</button>
+                    <button onclick="AddCart(@item.ProductID)" >加入購物車</button>
                 </td>
             </tr>
         }
 
     </table>
-    <script src="~/Scripts/Product.js"></script>
+
 </body>

@@ -25,7 +25,7 @@
                         <li>@Html.ActionLink("登出", "Logout", "Validate", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>
                             @Html.ActionLink("購物車", "CartItemList", "Shopping", new { area = "" }, new { @class = "nav-link" })
-                                                <span id="cartItemsAmounts"></span>
+                                                <span id="cartItemsQuantity"  style="color:red">你好</span>
                                             </li>
                         <li>@Html.ActionLink("我的訂單", "OrderList", "Shopping", new { area = "" }, new { @class = "nav-link" })</li>
 
@@ -50,5 +50,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/Layout.js"></script>
 </body>
 </html>
