@@ -121,10 +121,15 @@ namespace Store.Models
 
         public void CreateOrder(int cartID)
         {
+            var transaction = db.Database.BeginTransaction();
+            //Transaction衝突防止
+            try
+            {
 
+            
             //購物車ID對應的購物車和購物車項目，放入訂單和訂單項目
             var target = db.tCart.Where(m=>m.CartID==cartID).FirstOrDefault();
-            var targetItems = db.tCartItem.Where(m => m.tCart.CartID == cartID);
+            var targetItems = db.tCartItem.Where(m => m.tCart.CartID == cartID).ToList();
 
             if (target != null && targetItems.Any())
             {
@@ -154,10 +159,18 @@ namespace Store.Models
 
                 db.SaveChanges();
 
-                
+                transaction.Commit();
             }
 
-
+            }
+            catch
+            {
+                transaction.Rollback();
+            }
+            finally
+            {
+                transaction.Dispose();
+            }
         }
 
     }
