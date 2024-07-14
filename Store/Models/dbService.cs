@@ -145,7 +145,12 @@ namespace Store.Models
                     tempOrder.TotalPrice += item.tProducts.Price * item.Quantity;
                 }
 
+                //清空購物車
+                db.tCartItem.RemoveRange(targetItems);
+
                 db.SaveChanges();
+
+                
             }
 
 

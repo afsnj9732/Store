@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -47,7 +47,7 @@
           <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MemberID" Type="int" Nullable="false" />
           <Property Name="TotalPrice" Type="int" Nullable="false" />
-          <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tOrderItem">
           <Key>
@@ -173,7 +173,8 @@
             <End Role="tOrderItem" EntitySet="tOrderItem" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -225,7 +226,7 @@
           <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MemberID" Type="Int32" Nullable="false" />
           <Property Name="TotalPrice" Type="Int32" Nullable="false" />
-          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="tMembers" Relationship="Self.FK_tOrder_tMembers" FromRole="tOrder" ToRole="tMembers" />
           <NavigationProperty Name="tOrderItem" Relationship="Self.FK_tOrderItem_tOrder" FromRole="tOrder" ToRole="tOrderItem" />
         </EntityType>
@@ -248,9 +249,9 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="ImageURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tCartItem" Relationship="Self.FK_tCartItem_tProducts" FromRole="tProducts" ToRole="tCartItem" />
           <NavigationProperty Name="tOrderItem" Relationship="Self.FK_tOrderItem_tProducts" FromRole="tProducts" ToRole="tOrderItem" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Cart_Members">
           <End Role="tMembers" Type="Self.tMembers" Multiplicity="1" />
@@ -425,11 +426,11 @@
           <EntitySetMapping Name="tProducts">
             <EntityTypeMapping TypeName="dbStoreModel.tProducts">
               <MappingFragment StoreEntitySet="tProducts">
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

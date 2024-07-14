@@ -192,10 +192,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Scripts\Layout.js" />
-    <Content Include="favicon.ico" />
-    <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Models\dbStore.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbStore.edmx</DependentUpon>
@@ -206,6 +202,10 @@
       <DependentUpon>dbStore.edmx</DependentUpon>
       <LastGenOutput>dbStore.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Layout.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />

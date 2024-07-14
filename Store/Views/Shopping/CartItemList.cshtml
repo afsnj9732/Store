@@ -35,4 +35,9 @@
 
 </table>
 總價:@Price
-@Html.ActionLink("訂購", "PlaceOrder", new { cartID = Model.FirstOrDefault().CartID })
+@{
+    if (Model.FirstOrDefault()!=null)
+    {
+        @Html.ActionLink("訂購", "PlaceOrder", new { cartID = Model.FirstOrDefault().CartID })
+    }
+}
