@@ -10,9 +10,13 @@ namespace Store.Models
     {        
         dbStoreEntities db = new dbStoreEntities();     
         
-        public void CreateMember(tMembers memberInfo)
+        public void CreateMember(RegisterViewModel memberInfo)
         {
-            db.tMembers.Add(memberInfo);
+            tMembers memberDetail = new tMembers();
+            memberDetail.Email = memberInfo.Email;
+            memberDetail.UserName = memberInfo.UserName;
+            memberDetail.Password = memberInfo.Password;
+            db.tMembers.Add(memberDetail);
             db.SaveChanges();
         }
 

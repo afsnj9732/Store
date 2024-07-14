@@ -11,6 +11,7 @@ namespace Store.Controllers
 
     public class ValidateController : Controller
     {
+        dbService dbService = new dbService();
         // GET: Validate
         public ActionResult Login()
         {
@@ -23,7 +24,7 @@ namespace Store.Controllers
         {
             if (ModelState.IsValid) //資料驗證
             {
-                dbService dbService = new dbService();
+                //dbService dbService = new dbService();
                 if (dbService.CheckMember(memberInfo))
                 {
                     Session["memberID"] = dbService.GetMemberID(memberInfo);
@@ -58,11 +59,11 @@ namespace Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(tMembers memberInfo)
+        public ActionResult Register(RegisterViewModel memberInfo)
         {
             if (ModelState.IsValid)
             {
-                dbService dbService = new dbService();
+                //dbService dbService = new dbService();
                 dbService.CreateMember(memberInfo);
                 return RedirectToAction("Index", "Main");
             }
