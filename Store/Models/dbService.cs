@@ -96,6 +96,7 @@ namespace Store.Models
                 cart.UnitPrice = item.tProducts.Price;
                 cart.Quantity = item.Quantity;
                 cart.TotalPrice = cart.UnitPrice*cart.Quantity;
+                cart.CartID = item.CartID;
                 cartItemList.Add(cart);
             }
 
@@ -113,5 +114,42 @@ namespace Store.Models
             return db.tOrder.Where(m=>m.MemberID==memberID).ToList();
 
         }
+
+        public void CreateOrder(int cartID)
+        {
+
+            //購物車ID對應的購物車和購物車項目，放入訂單和訂單項目
+            var target = db.tCart.Where(m=>m.CartID==cartID).FirstOrDefault();
+            var targetItems = db.tCartItem.Where(m => m.tCart.CartID == cartID);
+
+            if (target != null && targetItems.Any())
+            {
+
+                tOrder tempOrder = new tOrder();
+                tempOrder.MemberID = target.MemberID;
+                tempOrder.TotalPrice = 0;
+                tempOrder.OrderDate = DateTime.Now;
+                db.tOrder.Add(tempOrder);
+                db.SaveChanges();
+                //先將訂單建立，再回頭修改TotalPrice
+                //透過訂單的確立，讓識別項的ID自動生成
+                //因為是關聯的關係
+                //所以下面遍歷只要抓上面tempOrder的OrderID就是對應的ID
+                foreach (var item in targetItems)
+                {
+                    tOrderItem tempOrderItem = new tOrderItem();
+                    tempOrderItem.OrderID = tempOrder.OrderID;
+                    tempOrderItem.ProductID = item.ProductID;
+                    tempOrderItem.Quantity = item.Quantity;
+                    db.tOrderItem.Add(tempOrderItem);
+                    tempOrder.TotalPrice += item.tProducts.Price * item.Quantity;
+                }
+
+                db.SaveChanges();
+            }
+
+
+        }
+
     }
 }

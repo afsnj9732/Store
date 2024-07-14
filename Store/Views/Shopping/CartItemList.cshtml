@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Store.Models.ShoppingCartViewModel>
+﻿@model List<Store.Models.ShoppingCartViewModel>
 @{
     ViewBag.Title = "CartItemList";
     int Price = 0;
@@ -28,11 +28,11 @@
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("刪除", "DeleteCart", new { CartItemID = item.CartItemID })
+                @Html.ActionLink("刪除", "DeleteCart", new { cartItemID = item.CartItemID })
             </td>
         </tr>
     }
 
 </table>
 總價:@Price
-@*@Html.ActionLink("訂購", "DeleteCart", new { CartItemID = item.CartItemID })*@
+@Html.ActionLink("訂購", "PlaceOrder", new { cartID = Model.FirstOrDefault().CartID })

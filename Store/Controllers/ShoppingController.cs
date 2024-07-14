@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace Store.Controllers
 {
     public class ShoppingController : Controller
     {
         // GET: Shopping
-
+        dbService dbService = new dbService();
         [Authorize]
         public ActionResult CartItemList()
         {
             int memberID = Convert.ToInt32(Session["memberID"]);
-            dbService dbService = new dbService();
+            //dbService dbService = new dbService();
             return View(dbService.MemberShoppingCart(memberID));
         }
 
@@ -29,7 +30,7 @@ namespace Store.Controllers
             }
             else
             {
-                dbService dbService = new dbService();
+                //dbService dbService = new dbService();
                 int memberID = Convert.ToInt32(Session["memberID"]);
                 dbService.GetCartItemQuantity(memberID);
                 return Json(new { CartItemQuantity = dbService.GetCartItemQuantity(memberID) });
@@ -47,7 +48,7 @@ namespace Store.Controllers
             }
             else
             {
-                dbService dbService = new dbService();
+                //dbService dbService = new dbService();
                 int loginMemberID = Convert.ToInt32(Session["memberID"]);
                 dbService.AddCartItem(loginMemberID, Convert.ToInt32(productID));
                 return Json(new { });
@@ -57,10 +58,10 @@ namespace Store.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult DeleteCart(int CartItemID) 
+        public ActionResult DeleteCart(int cartItemID) 
         {
-            dbService dbService= new dbService();
-            dbService.DeleteCartItem(CartItemID);
+            //dbService dbService= new dbService();
+            dbService.DeleteCartItem(cartItemID);
             return RedirectToAction("CartItemList");
         }
 
@@ -68,11 +69,16 @@ namespace Store.Controllers
         public ActionResult OrderList()
         {
             int memberID = Convert.ToInt32(Session["memberID"]);
-            dbService dbService = new dbService();            
+            //dbService dbService = new dbService();            
             return View(dbService.GetOrderList(memberID));
         }
 
-
+        [Authorize]
+        public ActionResult PlaceOrder(int cartID)
+        {
+            dbService.CreateOrder(cartID);            
+            return RedirectToAction("OrderList");
+        }
 
 
     }

@@ -12,6 +12,7 @@ namespace Store.Models
         public int UnitPrice {  get; set; }
         public int Quantity { get; set; }
         public int TotalPrice {  get; set; }
+        public int CartID {  get; set; }
 
     }
 }
