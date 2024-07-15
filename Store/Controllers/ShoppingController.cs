@@ -10,17 +10,17 @@ namespace Store.Controllers
 {
     public class ShoppingController : Controller
     {
-        // GET: Shopping
         dbService dbService = new dbService();
+
         [Authorize]
         public ActionResult CartItemList()
         {
-            int memberID = Convert.ToInt32(Session["memberID"]);
-            //dbService dbService = new dbService();
-            return View(dbService.MemberShoppingCart(memberID));
+            int loginMemberID = Convert.ToInt32(Session["memberID"]);
+            return View(dbService.MemberShoppingCart(loginMemberID).ToList());
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult GetCartItemQuantity()
         {
             if(!User.Identity.IsAuthenticated)
@@ -30,25 +30,24 @@ namespace Store.Controllers
             }
             else
             {
-                //dbService dbService = new dbService();
-                int memberID = Convert.ToInt32(Session["memberID"]);
-                dbService.GetCartItemQuantity(memberID);
-                return Json(new { CartItemQuantity = dbService.GetCartItemQuantity(memberID) });
+                int loginMemberID = Convert.ToInt32(Session["memberID"]);
+                dbService.GetCartItemQuantity(loginMemberID);
+                return Json(new { CartItemQuantity = dbService.GetCartItemQuantity(loginMemberID) });
 
             }
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddCart(string productID)//ajax 發送的資料型態為字串
         {
             if (!User.Identity.IsAuthenticated)
             {
                 int ajaxStatusCode = new HttpUnauthorizedResult().StatusCode;
-                return Json(new { ajaxStatus=ajaxStatusCode });//回傳401，讓ajax跳轉到登入畫面
+                return Json(new { ajaxStatus=ajaxStatusCode });//無授權，回傳401
             }
             else
             {
-                //dbService dbService = new dbService();
                 int loginMemberID = Convert.ToInt32(Session["memberID"]);
                 dbService.AddCartItem(loginMemberID, Convert.ToInt32(productID));
                 return Json(new { });
@@ -60,7 +59,6 @@ namespace Store.Controllers
         [Authorize]
         public ActionResult DeleteCart(int cartItemID) 
         {
-            //dbService dbService= new dbService();
             dbService.DeleteCartItem(cartItemID);
             return RedirectToAction("CartItemList");
         }
@@ -68,9 +66,8 @@ namespace Store.Controllers
         [Authorize]
         public ActionResult OrderList()
         {
-            int memberID = Convert.ToInt32(Session["memberID"]);
-            //dbService dbService = new dbService();            
-            return View(dbService.GetOrderList(memberID));
+            int loginMemberID = Convert.ToInt32(Session["memberID"]);
+            return View(dbService.GetOrderList(loginMemberID).ToList());
         }
 
         [Authorize]

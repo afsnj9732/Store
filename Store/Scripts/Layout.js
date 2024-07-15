@@ -3,7 +3,10 @@
     fetch(url,
         {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json' ,
+                'RequestVerificationToken': antiForgeryToken 
+            },
         }
     )
         .then(Response => {
@@ -22,7 +25,10 @@ function AddCart(listID) {
     fetch(url,
         {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': antiForgeryToken 
+            },
             body: JSON.stringify(data)
         }
     )

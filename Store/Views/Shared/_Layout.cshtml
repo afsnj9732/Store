@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
@@ -22,11 +22,12 @@
                     <li>@Html.ActionLink("商品", "Product", "Main", new { area = "" }, new { @class = "nav-link" })</li>
                     @if (User.Identity.IsAuthenticated)
                     {
+
                         <li>@Html.ActionLink("登出", "Logout", "Validate", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>
                             @Html.ActionLink("購物車", "CartItemList", "Shopping", new { area = "" }, new { @class = "nav-link" })
-                                                <span id="cartItemsQuantity"  style="color:red">你好</span>
-                                            </li>
+                            <span id="cartItemsQuantity" style="color:red">你好</span>
+                        </li>
                         <li>@Html.ActionLink("我的訂單", "OrderList", "Shopping", new { area = "" }, new { @class = "nav-link" })</li>
 
                     }
@@ -46,7 +47,12 @@
             <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
         </footer>
     </div>
-
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script>
+             var antiForgeryToken = '@Html.AntiForgeryToken().ToString()';
+        </script>
+    }
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

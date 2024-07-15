@@ -7,14 +7,14 @@ using System.Web;
 
 namespace Store.Models
 {
-    public class LoginModel
+    public class LoginViewModel
     {
         [DisplayName("信箱")]
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage ="請輸入信箱")]
+        [EmailAddress(ErrorMessage ="請輸入正確Email格式")]
         public string Email { get; set; }
         [DisplayName("密碼")]
-        [Required]
+        [Required(ErrorMessage ="請輸入密碼")]
         public string Password { get; set; }
     }
 }

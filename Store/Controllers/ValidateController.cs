@@ -12,7 +12,6 @@ namespace Store.Controllers
     public class ValidateController : Controller
     {
         dbService dbService = new dbService();
-        // GET: Validate
         public ActionResult Login()
         {
             return View();
@@ -20,20 +19,19 @@ namespace Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel memberInfo)
+        public ActionResult Login(LoginViewModel memberInfo)
         {
             if (ModelState.IsValid) //資料驗證
             {
-                //dbService dbService = new dbService();
-                if (dbService.CheckMember(memberInfo))
+                var loginMemberID = dbService.GetMemberID(memberInfo);
+                if (loginMemberID != null)
                 {
-                    Session["memberID"] = dbService.GetMemberID(memberInfo);
+                    Session["memberID"] = loginMemberID;
                     FormsAuthentication.RedirectFromLoginPage(memberInfo.Email, true);//授權
                     return RedirectToAction("Index", "Main");
                 }
                 else
                 {
-                    //ViewBag.MemberInfo = "不存在的帳號密碼";
                     return View();
                 }
             }
@@ -63,7 +61,6 @@ namespace Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                //dbService dbService = new dbService();
                 dbService.CreateMember(memberInfo);
                 return RedirectToAction("Index", "Main");
             }

@@ -150,7 +150,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbStore.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\sysdiagrams.cs">
