@@ -20,7 +20,6 @@ namespace Store.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult GetCartItemQuantity()
         {
             if(!User.Identity.IsAuthenticated)
@@ -38,7 +37,6 @@ namespace Store.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult AddCart(string productID)//ajax 發送的資料型態為字串
         {
             if (!User.Identity.IsAuthenticated)

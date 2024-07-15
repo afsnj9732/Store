@@ -4,8 +4,7 @@
         {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json' ,
-                'RequestVerificationToken': antiForgeryToken 
+                'Content-Type': 'application/json' 
             },
         }
     )
@@ -26,8 +25,7 @@ function AddCart(listID) {
         {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json',
-                'RequestVerificationToken': antiForgeryToken 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         }
