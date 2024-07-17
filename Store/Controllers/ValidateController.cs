@@ -61,8 +61,18 @@ namespace Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbService.CreateMember(memberInfo);
-                return RedirectToAction("Index", "Main");
+                var memberExist = dbService.CheckMemberExist(memberInfo.Email);
+                if(memberExist)
+                {
+                    ViewBag.Exist = "Email已註冊";
+                    return View(memberInfo);
+                }
+                else
+                {
+                    dbService.CreateMember(memberInfo);
+                    return RedirectToAction("Index", "Main");
+                }
+
             }
             else
             {

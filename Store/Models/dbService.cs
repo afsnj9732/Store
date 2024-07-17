@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace Store.Models
@@ -23,6 +24,19 @@ namespace Store.Models
             }
         }
 
+        public Boolean CheckMemberExist(string memberEmail)
+        {
+            var memberExist = db.tMembers.Where(m => m.Email == memberEmail).FirstOrDefault();
+            if(memberExist == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public void CreateMember(RegisterViewModel memberInfo)
         {
             tMembers newMember = new tMembers();
@@ -30,7 +44,7 @@ namespace Store.Models
             newMember.UserName = memberInfo.UserName;
             newMember.Password = memberInfo.Password;
             db.tMembers.Add(newMember);
-            db.SaveChanges();
+            db.SaveChanges();           
         }
 
         public int? GetCartItemQuantity(int loginMemberID)
