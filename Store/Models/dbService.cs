@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -39,17 +40,25 @@ namespace Store.Models
 
         public void CreateMember(RegisterViewModel memberInfo)
         {
-            tMembers newMember = new tMembers();
-            newMember.Email = memberInfo.Email;
-            newMember.UserName = memberInfo.UserName;
-            newMember.Password = memberInfo.Password;
-            db.tMembers.Add(newMember);
-            db.SaveChanges();           
+            string email = memberInfo.Email;
+            string userName = memberInfo.UserName;
+            string password = memberInfo.Password;
+
+            db.Database.ExecuteSqlCommand("EXEC dbo.CreateMemberProc @Email, @UserName, @Password",
+                new SqlParameter("Email", email),
+                new SqlParameter("UserName", userName),
+                new SqlParameter("Password", password) 
+            );
+            //tMembers newMember = new tMembers();
+            //newMember.Email = memberInfo.Email;
+            //newMember.UserName = memberInfo.UserName;
+            //newMember.Password = memberInfo.Password;
+            //db.tMembers.Add(newMember);
+            //db.SaveChanges();           
         }
 
         public int? GetCartItemQuantity(int loginMemberID)
         {
-            //調用View簡化查詢
             int? ItemQuantity = db.vw_GetCartItemQuantity
                 .Where(m => m.MemberID == loginMemberID).Select(m => m.TotalQuantity).FirstOrDefault();
             //TotalQuantity是聚合函數顯示的值，默認為int，int的default值是0
