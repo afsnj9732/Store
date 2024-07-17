@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="af8074c2504f4b54905e76a69a1594bc" Name="Diagram1">
+      <Diagram DiagramId="6ee06f6c48454015acb0e09aa5fbfdb8" Name="Diagram1">
         <EntityTypeShape EntityType="dbStoreModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="dbStoreModel.tCart" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dbStoreModel.tCartItem" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="dbStoreModel.tOrder" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="dbStoreModel.tOrderItem" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbStoreModel.tProducts" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbStoreModel.vw_GetCartItemQuantity" Width="1.5" PointX="2.75" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="dbStoreModel.FK_Cart_Members" ManuallyRouted="false" />
         <AssociationConnector Association="dbStoreModel.FK_tCartItem_tCart" ManuallyRouted="false" />
         <AssociationConnector Association="dbStoreModel.FK_tCartItem_tProducts" ManuallyRouted="false" />

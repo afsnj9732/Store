@@ -153,6 +153,12 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
@@ -172,6 +178,9 @@
       <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProducts.cs">
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_GetCartItemQuantity.cs">
       <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

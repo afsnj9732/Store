@@ -33,15 +33,20 @@ namespace Store.Models
             db.SaveChanges();
         }
 
-        public int GetCartItemQuantity(int loginMemberID)
+        public int? GetCartItemQuantity(int loginMemberID)
         {
-            var targetCart = db.tCart.Where(m => m.MemberID == loginMemberID).FirstOrDefault();
-            int targetItemQuantity = 0;
-            foreach (var item in targetCart.tCartItem)
-            {
-                targetItemQuantity += item.Quantity;
-            }
-            return targetItemQuantity;
+            //調用View簡化查詢
+            int? ItemQuantity = db.vw_GetCartItemQuantity
+                .Where(m => m.MemberID == loginMemberID).Select(m => m.TotalQuantity).FirstOrDefault();
+            //TotalQuantity是聚合函數顯示的值，默認為int，int的default值是0
+
+            //var targetCart = db.tCart.Where(m => m.MemberID == loginMemberID).FirstOrDefault();
+            //int targetItemQuantity = 0;
+            //foreach (var item in targetCart.tCartItem)
+            //{
+            //    targetItemQuantity += item.Quantity;
+            //}
+            return ItemQuantity;
         }
 
         public void AddCartItem(int loginMemberID, int addProductID)
@@ -54,6 +59,8 @@ namespace Store.Models
                 newCart.MemberID = loginMemberID;
                 db.tCart.Add(newCart);
                 db.SaveChanges();
+
+                memberCart = newCart;//將新建立的購物車設值給剛剛查詢的memberCart
             }
 
 
@@ -80,20 +87,24 @@ namespace Store.Models
         {
             List<ShoppingCartViewModel> cartItemList = new List<ShoppingCartViewModel>();
             var targetCart = db.tCart.Where(m => m.MemberID == loginMemberID).FirstOrDefault();
-            List<tCartItem> targetCartList = db.tCartItem.Include(o=>o.tProducts).Where(m => m.CartID == targetCart.CartID).ToList();
-            //Include預先載入，能避免下面foreach利用導航屬性時每次都重複查詢
-            foreach (tCartItem item in targetCartList)
+            if (targetCart != null)
             {
-                ShoppingCartViewModel cart = new ShoppingCartViewModel();
-                cart.CartItemID = item.CartItemID;
-                cart.ProductName = item.tProducts.Name;//利用關聯，使用導航屬性查詢
-                cart.UnitPrice = item.tProducts.Price;
-                cart.Quantity = item.Quantity;
-                cart.TotalPrice = cart.UnitPrice * cart.Quantity;
-                cart.CartID = item.CartID;
-                cartItemList.Add(cart);
+                List<tCartItem> targetCartList = db.tCartItem.Include(o => o.tProducts).Where(m => m.CartID == targetCart.CartID).ToList();
+                //Include預先載入，能避免下面foreach利用導航屬性時每次都重複查詢
+                foreach (tCartItem item in targetCartList)
+                {
+                    ShoppingCartViewModel cart = new ShoppingCartViewModel();
+                    cart.CartItemID = item.CartItemID;
+                    cart.ProductName = item.tProducts.Name;//利用關聯，使用導航屬性查詢
+                    cart.UnitPrice = item.tProducts.Price;
+                    cart.Quantity = item.Quantity;
+                    cart.TotalPrice = cart.UnitPrice * cart.Quantity;
+                    cart.CartID = item.CartID;
+                    cartItemList.Add(cart);
+                }
             }
             return cartItemList;
+
         }
 
         public void DeleteCartItem(int cartItemID)
