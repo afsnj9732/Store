@@ -16,5 +16,6 @@ namespace Store.Models
         [DisplayName("密碼")]
         [Required(ErrorMessage ="請輸入密碼")]
         public string Password { get; set; }
+        public string recaptchaResponse { get; set; }
     }
 }

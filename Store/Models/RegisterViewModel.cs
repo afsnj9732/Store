@@ -25,6 +25,7 @@ namespace Store.Models
         [Required(ErrorMessage = "請輸入Email")]
         [EmailAddress(ErrorMessage ="請輸入正確Email格式")]
         public string Email { get; set; }
-        
+        public string recaptchaResponse { get; set; }
+
     }
 }

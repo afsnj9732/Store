@@ -1,12 +1,15 @@
 ﻿@model Store.Models.LoginViewModel
 
 @{
-    ViewBag.Title = "Login";    
+    ViewBag.Title = "Login";
 }
-
+<head>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdoNBIqAAAAABPwyhXYJInO4cjAIh-I6l52_0PN"></script>
+</head>
 <h2>Login</h2>
-@using (Html.BeginForm("Login","Validate",FormMethod.Post)) 
+@using (Html.BeginForm("Login", "Validate", FormMethod.Post))
 {
+    <input type="hidden" id="recaptcha" name="recaptchaResponse">
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <h4>tMembers</h4>

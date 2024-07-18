@@ -4,10 +4,14 @@
     ViewBag.Title = "Register";
 }
 
+<head>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdoNBIqAAAAABPwyhXYJInO4cjAIh-I6l52_0PN"></script>
+</head>
 <h2>註冊</h2>
 
 @using (Html.BeginForm("Register", "Validate", FormMethod.Post))
 {
+    <input type="hidden" id="recaptcha" name="recaptchaResponse">
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <h4>註冊</h4>
