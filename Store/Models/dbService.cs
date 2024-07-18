@@ -44,7 +44,7 @@ namespace Store.Models
             string userName = memberInfo.UserName;
             string password = memberInfo.Password;
 
-            db.Database.ExecuteSqlCommand("EXEC dbo.CreateMemberProc @Email, @UserName, @Password",
+            db.Database.ExecuteSqlCommand("EXEC dbo.usp_CreateMember @Email, @UserName, @Password",
                 new SqlParameter("Email", email),
                 new SqlParameter("UserName", userName),
                 new SqlParameter("Password", password) 
