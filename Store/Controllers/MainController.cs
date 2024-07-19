@@ -9,18 +9,18 @@ namespace Store.Controllers
 {
     public class MainController : Controller
     {
+        dbService dbService = new dbService();
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Product()
+        public ActionResult Product(int pageNow = 1)
         {
-            var ProductList = new dbStoreEntities().tProducts.ToList();
+            var ProductList = dbService.GetProductList(pageNow);
+            ViewBag.TotalPages = dbService.GetProductTotalPage();
             return View(ProductList);
         }
-
-
 
 
     }

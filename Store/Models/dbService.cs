@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -12,6 +13,21 @@ namespace Store.Models
     {
         dbStoreEntities db = new dbStoreEntities();
 
+        public int GetProductTotalPage()
+        {
+            double productCounts = db.tProducts.Count();
+            int totalPage = (int)Math.Ceiling(productCounts / 10);
+            return totalPage;
+        }
+
+        public List<tProducts> GetProductList(int pageNow)
+        {
+            var nowPageProduct = db.tProducts.OrderBy(m=>m.ProductID)
+                .Skip((pageNow - 1)*10)
+                .Take(10)
+                .ToList();
+            return nowPageProduct;
+        }
         public int? GetMemberID(LoginViewModel memberInfo)
         {
             var target = db.tMembers.Where(m => m.Email == memberInfo.Email && m.Password == memberInfo.Password).FirstOrDefault();
