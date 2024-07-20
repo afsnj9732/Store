@@ -25,18 +25,25 @@ namespace Store.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel memberInfo)
         {
-            bool ifCaptcha = await VerifyRecaptcha(memberInfo.recaptchaResponse);
-            if (ModelState.IsValid && ifCaptcha) //資料驗證
+            if (ModelState.IsValid) //資料驗證
             {
-                var loginMemberID = dbService.GetMemberID(memberInfo);
+                bool ifCaptcha = await VerifyRecaptcha(memberInfo.recaptchaResponse);
+                if (ifCaptcha == false)
+                {
+                    ViewBag.LoginError = "你有點像機器人，請重新嘗試";
+                    return View(memberInfo);
+                }
+                var loginMemberID = dbService.GetMemberID(memberInfo.Email,memberInfo.Password);
                 if (loginMemberID != null)
                 {
+                    ViewBag.LoginError = "";
                     Session["memberID"] = loginMemberID;
                     FormsAuthentication.RedirectFromLoginPage(memberInfo.Email, true);//授權
                     return RedirectToAction("Index", "Main");
                 }
                 else
                 {
+                    ViewBag.LoginError = "帳號或密碼輸入錯誤";
                     return View();
                 }
             }
@@ -44,6 +51,7 @@ namespace Store.Controllers
             {
                 return View(memberInfo);
             }
+
 
         }
 
@@ -64,18 +72,28 @@ namespace Store.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel memberInfo)
         {
-            bool ifCaptcha = await VerifyRecaptcha(memberInfo.recaptchaResponse);
-            if (ModelState.IsValid && ifCaptcha)
+            if (ModelState.IsValid)
             {
+                bool ifCaptcha = await VerifyRecaptcha(memberInfo.recaptchaResponse);
+                if(ifCaptcha == false)
+                {
+                    ViewBag.RegisterError = "你有點像機器人，請重新嘗試";
+                    return View(memberInfo);
+                }
                 var memberExist = dbService.CheckMemberExist(memberInfo.Email);
                 if (memberExist)
                 {
-                    ViewBag.Exist = "Email已註冊";
+                    ViewBag.RegisterError = "Email已註冊";
                     return View(memberInfo);
                 }
                 else
                 {
+                    
                     dbService.CreateMember(memberInfo);
+                    var loginMemberID = dbService.GetMemberID(memberInfo.Email,memberInfo.Password);
+                    Session["memberID"] = loginMemberID;
+                    FormsAuthentication.RedirectFromLoginPage(memberInfo.Email, true);//授權                    
+                    TempData["Register"] = "註冊成功";
                     return RedirectToAction("Index", "Main");
                 }
 

@@ -14,8 +14,12 @@ function GetCartItemQuantity() {
             return Response.json();
         })
         .then(data => {
-            if (data.ajaxStatus!=401) {
-                document.getElementById("cartItemsQuantity").textContent = data.CartItemQuantity;
+            if (data.ajaxStatus != 401) {
+                if (data.CartItemQuantity != null) {
+                    document.getElementById("cartItemsQuantity").textContent = data.CartItemQuantity;
+                } else {
+                    document.getElementById("cartItemsQuantity").textContent = 0;
+                }
             }
 
         })

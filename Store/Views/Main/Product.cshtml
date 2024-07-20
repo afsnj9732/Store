@@ -1,7 +1,7 @@
 ﻿@model List<Store.Models.tProducts>
 
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "商品列表";
 }
 <body>
     <h2>商品列表</h2>
@@ -15,23 +15,31 @@
             }
         </ul>
     </div>
-    <table class="table">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <figure class="figure">
+                        <div style="width:150px;height:120px">
+                            <img src="~/Content/images/@(item.ImageURL).jpg" class="figure-img img-fluid rounded" alt="@item.Description" style="max-width: 150px; max-height: 120px;">
+                        </div>
+                        <figcaption class="figure-caption">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </figcaption>
+                        <figcaption class="figure-caption">
+                            售價:@Html.DisplayFor(modelItem => item.Price)
+                        </figcaption>
+                        <button type="button" class="btn btn-primary" onclick="AddCart(@item.ProductID)">加入購物車</button>
+                    </figure>
+                </div>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <button onclick="AddCart(@item.ProductID)">加入購物車</button>
-                </td>
-            </tr>
-        }
+            }
+        </div>
+    </div>
 
-    </table>
+
+
+    
 
 </body>

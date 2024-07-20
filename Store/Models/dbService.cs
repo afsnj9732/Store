@@ -16,21 +16,21 @@ namespace Store.Models
         public int GetProductTotalPage()
         {
             double productCounts = db.tProducts.Count();
-            int totalPage = (int)Math.Ceiling(productCounts / 10);
+            int totalPage = (int)Math.Ceiling(productCounts / 5);
             return totalPage;
         }
 
         public List<tProducts> GetProductList(int pageNow)
         {
             var nowPageProduct = db.tProducts.OrderBy(m=>m.ProductID)
-                .Skip((pageNow - 1)*10)
-                .Take(10)
+                .Skip((pageNow - 1)*5)
+                .Take(5)
                 .ToList();
             return nowPageProduct;
         }
-        public int? GetMemberID(LoginViewModel memberInfo)
+        public int? GetMemberID(string memberEmail,string memberPassword)
         {
-            var target = db.tMembers.Where(m => m.Email == memberInfo.Email && m.Password == memberInfo.Password).FirstOrDefault();
+            var target = db.tMembers.Where(m => m.Email == memberEmail && m.Password == memberPassword).FirstOrDefault();
             if (target != null)
             {
                 return target.MemberID;
@@ -77,7 +77,7 @@ namespace Store.Models
         {
             int? ItemQuantity = db.vw_GetCartItemQuantity
                 .Where(m => m.MemberID == loginMemberID).Select(m => m.TotalQuantity).FirstOrDefault();
-            //TotalQuantity是聚合函數顯示的值，默認為int，int的default值是0
+            //int?表示可為null
 
             //var targetCart = db.tCart.Where(m => m.MemberID == loginMemberID).FirstOrDefault();
             //int targetItemQuantity = 0;

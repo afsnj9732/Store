@@ -30,7 +30,6 @@ namespace Store.Controllers
             else
             {
                 int loginMemberID = Convert.ToInt32(Session["memberID"]);
-                dbService.GetCartItemQuantity(loginMemberID);
                 return Json(new { CartItemQuantity = dbService.GetCartItemQuantity(loginMemberID) });
 
             }

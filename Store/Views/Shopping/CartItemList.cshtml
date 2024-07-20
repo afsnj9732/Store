@@ -1,14 +1,26 @@
 ﻿@model List<Store.Models.ShoppingCartViewModel>
 @{
-    ViewBag.Title = "CartItemList";
+    ViewBag.Title = "購物車";
     int Price = 0;
 }
 
-<h2>CartItemList</h2>
-
-
+<h2>購物車</h2>
+<hr />
 <table class="table">
-
+    <tr>
+        <th scope="col">
+            商品名稱
+        </th>
+        <th scope="col">
+            商品單價
+        </th>
+        <th scope="col">
+            數量
+        </th>
+        <th scope="col">
+            總價
+        </th>
+    </tr>
     @foreach (var item in Model)
     {
         Price += item.TotalPrice;
@@ -26,18 +38,17 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("刪除", "DeleteCart", new { cartItemID = item.CartItemID })
+                @Html.ActionLink("刪除", "DeleteCart", new { cartItemID = item.CartItemID }, new { @class = "btn btn-sm btn-danger" })
             </td>
         </tr>
     }
-
 </table>
-總價:@Price
+<p>訂單總金額:@Price</p>
 @{
-    if (Model.FirstOrDefault()!=null)
+    if (Model.FirstOrDefault() != null)
     {
-        @Html.ActionLink("訂購", "PlaceOrder", new { cartID = Model.FirstOrDefault().CartID })
+        <div>
+            @Html.ActionLink("訂購", "PlaceOrder", new { cartID = Model.FirstOrDefault().CartID }, new { @class = "btn btn-sm btn-primary" })
+        </div>
     }
 }

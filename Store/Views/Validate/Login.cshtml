@@ -1,47 +1,39 @@
 ﻿@model Store.Models.LoginViewModel
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "登入";
 }
 <head>
     <script src="https://www.google.com/recaptcha/api.js?render=6LdoNBIqAAAAABPwyhXYJInO4cjAIh-I6l52_0PN"></script>
     <script src="~/Scripts/Recaptcha.js"></script>
 </head>
-<h2>Login</h2>
+<h2>登入</h2>
 @using (Html.BeginForm("Login", "Validate", FormMethod.Post))
 {
     <input type="hidden" id="recaptcha" name="recaptchaResponse">
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <h4>tMembers</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="container">
 
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="登入" class="btn btn-default" />
-            </div>
-        </div>
+    <hr />
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label" })
+        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "form-label" })
+        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    </div>
+    <div class="mb-3 container p-0 m-0 ">
         <div>
-            @Html.ActionLink("註冊", "Register", "Validate", new { area = "" }, new { @class = "nav-link" })
+            <button type="submit" class="btn btn-secondary">登入</button>
+            <button type="button" class="btn btn-primary " onclick="location.href='@Url.Action("Register", "Validate")'">註冊</button>
         </div>
     </div>
+    <p style="color:red">@ViewBag.LoginError</p>
+
+</div>
 }
 
 

@@ -1,71 +1,59 @@
-﻿@model IEnumerable<Store.Models.tOrder>
+﻿@model List<Store.Models.tOrder>
 
 @{
-    ViewBag.Title = "OrderList";
+    ViewBag.Title = "訂單紀錄";
 }
 
-@*<h2>OrderList</h2>
+<h2>訂單紀錄</h2>
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        訂單編號
+                    </th>
+                    <th scope="col">
+                        訂單總金額
+                    </th>
+                    <th scope="col">
+                        訂購日期
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.OrderID)</td>
+                        <td>@Html.DisplayFor(m => item.TotalPrice)</td>
+                        <td>@Html.DisplayFor(m => item.OrderDate)</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>商品名稱</th>
+                        <th>商品數量</th>
+                    </tr>
+                    foreach (var orderItem in item.tOrderItem)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>
+                                @Html.DisplayFor(m => orderItem.tProducts.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => orderItem.Quantity)
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<table class="table">
-
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <th></th>
-            <th>商品名稱</th>
-            <th>商品數量</th>
-        </tr>
-        foreach (var orderItem in item.tOrderItem)
-        {
-            <tr>
-                <td></td>
-                <td>
-                    @Html.DisplayFor(modelItem => orderItem.tProducts.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => orderItem.Quantity)
-                </td>
-            </tr>
-        }
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    }
-
-</table>
