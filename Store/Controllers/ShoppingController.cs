@@ -88,8 +88,19 @@ namespace Store.Controllers
                 Source = stripeToken,
             };
             var service = new ChargeService();
-            var charge = service.Create(options);
-            return RedirectToAction("OrderList");
+            try
+            {
+                var charge = service.Create(options);
+                TempData["CreditCardPayMessage"] = "付款成功";
+                return RedirectToAction("OrderList");
+            }catch (Exception ex)
+            {
+                TempData["CreditCardPayMessage"] = "付款失敗";
+                Console.WriteLine(ex.ToString());
+                return RedirectToAction("OrderList");
+            }
+            
+            
         }
 
 
