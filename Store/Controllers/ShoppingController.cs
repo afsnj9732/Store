@@ -1,4 +1,5 @@
 ﻿using Store.Models;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,7 @@ namespace Store.Controllers
     {
         dbService dbService = new dbService();
 
-        [Authorize]
-        public ActionResult CartItemList()
-        {
-            int loginMemberID = Convert.ToInt32(Session["memberID"]);
-            return View(dbService.MemberShoppingCart(loginMemberID).ToList());
-        }
+
 
         [HttpPost]
         public ActionResult GetCartItemQuantity()
@@ -68,9 +64,31 @@ namespace Store.Controllers
         }
 
         [Authorize]
-        public ActionResult PlaceOrder(int cartID)
+        public ActionResult CartItemList()
         {
-            dbService.CreateOrder(cartID);            
+            ViewBag.StripePublicKey = "pk_test_51Pesm02La0H5PIYutJuIiEkUXFXagRryVad9x9fhP4WDFqjjzPhO0shoZqRQMhdXxvtEfGxmb7gruzpjkVCKDXA00012AZZjHg";
+            int loginMemberID = Convert.ToInt32(Session["memberID"]);
+            var cartItemList = dbService.MemberShoppingCart(loginMemberID).ToList();
+            return View(cartItemList);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PlaceOrder(string stripeToken,int cartID)
+        {
+            int newOrderID = dbService.CreateOrder(cartID);  
+            int orderPrice = dbService.GetOrderPrice(newOrderID);
+            StripeConfiguration.ApiKey = "sk_test_51Pesm02La0H5PIYu13IyQZhzBEoV4xiuU2DY225yu7pZOezKhR1NU1bULY5KLm2CN6b1JzfmZK4SuFfDhIyQ8yHx00oqPP1pYF";
+            var options = new ChargeCreateOptions
+            {
+                Amount = orderPrice*100, 
+                Currency = "twd",
+                Description = "付款",
+                Source = stripeToken,
+            };
+            var service = new ChargeService();
+            var charge = service.Create(options);
             return RedirectToAction("OrderList");
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stripe.BillingPortal;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -159,10 +160,11 @@ namespace Store.Models
 
         }
 
-        public void CreateOrder(int cartID)
+        public int CreateOrder(int cartID)
         {
             var transaction = db.Database.BeginTransaction();
             //Transaction衝突防止
+            int newOrderID =0;
             try
             {
                 var target = db.tCart.Where(m => m.CartID == cartID).FirstOrDefault();
@@ -189,11 +191,13 @@ namespace Store.Models
                         db.tOrderItem.Add(tempOrderItem);
                         tempOrder.TotalPrice += item.tProducts.Price * item.Quantity;
                     }
-
+                    
                     //清空購物車
                     db.tCartItem.RemoveRange(targetItems);
                     db.SaveChanges();
                     transaction.Commit();
+                    newOrderID = tempOrder.OrderID;
+                    return newOrderID;
                 }
             }
             catch
@@ -204,6 +208,12 @@ namespace Store.Models
             {
                 transaction.Dispose();
             }
+            return newOrderID;
+        }
+
+        public int GetOrderPrice(int orderID)
+        {
+            return db.tOrder.Where(m=>m.OrderID == orderID).FirstOrDefault().TotalPrice;
         }
 
     }
