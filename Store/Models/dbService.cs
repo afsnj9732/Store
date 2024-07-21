@@ -11,7 +11,7 @@ namespace Store.Models
 {
     public class dbService
     {
-        dbStoreEntities db = new dbStoreEntities();
+        dbStoreAzureEntities db = new dbStoreAzureEntities();
 
         public int GetProductTotalPage()
         {

@@ -15,10 +15,10 @@ namespace Store.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class dbStoreEntities : DbContext
+    public partial class dbStoreAzureEntities : DbContext
     {
-        public dbStoreEntities()
-            : base("name=dbStoreEntities")
+        public dbStoreAzureEntities()
+            : base("name=dbStoreAzureEntities")
         {
         }
     

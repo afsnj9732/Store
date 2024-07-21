@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbStoreAzureModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -185,7 +185,7 @@
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
-        <EntityContainer Name="dbStoreModelStoreContainer">
+        <EntityContainer Name="dbStoreAzureModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tCart" EntityType="Self.tCart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tCartItem" EntityType="Self.tCartItem" Schema="dbo" store:Type="Tables" />
@@ -228,7 +228,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="dbStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="dbStoreAzureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -383,7 +383,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbStoreEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dbStoreAzureEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="tCart" EntityType="Self.tCart" />
           <EntitySet Name="tCartItem" EntityType="Self.tCartItem" />
@@ -432,11 +432,11 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(dbStoreModel.sp_helpdiagramdefinition_Result)">
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(dbStoreAzureModel.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(dbStoreModel.sp_helpdiagrams_Result)">
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(dbStoreAzureModel.sp_helpdiagrams_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -468,9 +468,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbStoreModelStoreContainer" CdmEntityContainer="dbStoreEntities">
+        <EntityContainerMapping StorageEntityContainer="dbStoreAzureModelStoreContainer" CdmEntityContainer="dbStoreAzureEntities">
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="dbStoreModel.sysdiagrams">
+            <EntityTypeMapping TypeName="dbStoreAzureModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -481,7 +481,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tCart">
-            <EntityTypeMapping TypeName="dbStoreModel.tCart">
+            <EntityTypeMapping TypeName="dbStoreAzureModel.tCart">
               <MappingFragment StoreEntitySet="tCart">
                 <ScalarProperty Name="CartID" ColumnName="CartID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
@@ -489,7 +489,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tCartItem">
-            <EntityTypeMapping TypeName="dbStoreModel.tCartItem">
+            <EntityTypeMapping TypeName="dbStoreAzureModel.tCartItem">
               <MappingFragment StoreEntitySet="tCartItem">
                 <ScalarProperty Name="CartItemID" ColumnName="CartItemID" />
                 <ScalarProperty Name="CartID" ColumnName="CartID" />
@@ -499,7 +499,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tMembers">
-            <EntityTypeMapping TypeName="dbStoreModel.tMembers">
+            <EntityTypeMapping TypeName="dbStoreAzureModel.tMembers">
               <MappingFragment StoreEntitySet="tMembers">
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -509,7 +509,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tOrder">
-            <EntityTypeMapping TypeName="dbStoreModel.tOrder">
+            <EntityTypeMapping TypeName="dbStoreAzureModel.tOrder">
               <MappingFragment StoreEntitySet="tOrder">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
@@ -519,7 +519,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tOrderItem">
-            <EntityTypeMapping TypeName="dbStoreModel.tOrderItem">
+            <EntityTypeMapping TypeName="dbStoreAzureModel.tOrderItem">
               <MappingFragment StoreEntitySet="tOrderItem">
                 <ScalarProperty Name="OrderItemID" ColumnName="OrderItemID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -529,7 +529,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tProducts">
-            <EntityTypeMapping TypeName="dbStoreModel.tProducts">
+            <EntityTypeMapping TypeName="dbStoreAzureModel.tProducts">
               <MappingFragment StoreEntitySet="tProducts">
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -540,27 +540,27 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vw_GetCartItemQuantity">
-            <EntityTypeMapping TypeName="dbStoreModel.vw_GetCartItemQuantity">
+            <EntityTypeMapping TypeName="dbStoreAzureModel.vw_GetCartItemQuantity">
               <MappingFragment StoreEntitySet="vw_GetCartItemQuantity">
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="dbStoreModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="dbStoreModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="dbStoreModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="dbStoreModel.Store.sp_helpdiagramdefinition">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="dbStoreAzureModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="dbStoreAzureModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="dbStoreAzureModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="dbStoreAzureModel.Store.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbStoreModel.sp_helpdiagramdefinition_Result">
+              <ComplexTypeMapping TypeName="dbStoreAzureModel.sp_helpdiagramdefinition_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="dbStoreModel.Store.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="dbStoreAzureModel.Store.sp_helpdiagrams">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbStoreModel.sp_helpdiagrams_Result">
+              <ComplexTypeMapping TypeName="dbStoreAzureModel.sp_helpdiagrams_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -569,9 +569,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="dbStoreModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="dbStoreModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="usp_CreateMember" FunctionName="dbStoreModel.Store.usp_CreateMember" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="dbStoreAzureModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="dbStoreAzureModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="usp_CreateMember" FunctionName="dbStoreAzureModel.Store.usp_CreateMember" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

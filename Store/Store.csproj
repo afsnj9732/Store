@@ -135,53 +135,53 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\dbService.cs" />
-    <Compile Include="Models\dbStore.Context.cs">
+    <Compile Include="Models\dbStoreAzure.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbStore.Context.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbStore.cs">
+    <Compile Include="Models\dbStoreAzure.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbStore.Designer.cs">
+    <Compile Include="Models\dbStoreAzure.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbStore.edmx</DependentUpon>
+      <DependentUpon>dbStoreAzure.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tCart.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tCartItem.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tMembers.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrder.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrderItem.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProducts.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vw_GetCartItemQuantity.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -202,15 +202,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Models\dbStore.Context.tt">
+    <Content Include="Models\dbStoreAzure.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbStore.edmx</DependentUpon>
-      <LastGenOutput>dbStore.Context.cs</LastGenOutput>
+      <DependentUpon>dbStoreAzure.edmx</DependentUpon>
+      <LastGenOutput>dbStoreAzure.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\dbStore.tt">
+    <Content Include="Models\dbStoreAzure.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbStore.edmx</DependentUpon>
-      <LastGenOutput>dbStore.cs</LastGenOutput>
+      <DependentUpon>dbStoreAzure.edmx</DependentUpon>
+      <LastGenOutput>dbStoreAzure.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\Layout.js" />
     <Content Include="favicon.ico" />
@@ -222,12 +222,12 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\dbStore.edmx">
+    <EntityDeploy Include="Models\dbStoreAzure.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbStore.Designer.cs</LastGenOutput>
+      <LastGenOutput>dbStoreAzure.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\dbStore.edmx.diagram">
-      <DependentUpon>dbStore.edmx</DependentUpon>
+    <Content Include="Models\dbStoreAzure.edmx.diagram">
+      <DependentUpon>dbStoreAzure.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
