@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e249681d4a0d4f428bc7f36b777a59c8" Name="Diagram1">
-        <EntityTypeShape EntityType="dbStoreAzureModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+      <Diagram DiagramId="b7e12b72621f40a0bcc4e575d814d6ed" Name="Diagram1">
         <EntityTypeShape EntityType="dbStoreAzureModel.tCart" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dbStoreAzureModel.tCartItem" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbStoreAzureModel.tMembers" Width="1.5" PointX="1.5" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="dbStoreAzureModel.tOrder" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="dbStoreAzureModel.tOrderItem" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbStoreAzureModel.tProducts" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbStoreAzureModel.vw_GetCartItemQuantity" Width="1.5" PointX="2.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbStoreAzureModel.vw_GetCartItemQuantity" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbStoreAzureModel.database_firewall_rules" Width="1.5" PointX="2.75" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="dbStoreAzureModel.FK_Cart_Members" ManuallyRouted="false" />
         <AssociationConnector Association="dbStoreAzureModel.FK_tCartItem_tCart" ManuallyRouted="false" />
         <AssociationConnector Association="dbStoreAzureModel.FK_tCartItem_tProducts" ManuallyRouted="false" />

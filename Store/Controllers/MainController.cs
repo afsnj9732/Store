@@ -1,6 +1,7 @@
 ﻿using Store.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,9 +18,9 @@ namespace Store.Controllers
 
         public ActionResult Product(int pageNow = 1)
         {
-            var ProductList = dbService.GetProductList(pageNow);
-            ViewBag.TotalPages = dbService.GetProductTotalPage();
-            return View(ProductList);
+                var ProductList = dbService.GetProductList(pageNow);
+                ViewBag.TotalPages = dbService.GetProductTotalPage();
+                return View(ProductList);         
         }
 
 

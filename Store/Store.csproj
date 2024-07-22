@@ -151,6 +151,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\database_firewall_rules.cs">
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\dbService.cs" />
     <Compile Include="Models\dbStoreAzure.Context.cs">
       <AutoGen>True</AutoGen>
@@ -170,15 +173,6 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tCart.cs">
       <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
@@ -219,6 +213,17 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\images\Apple.jpg" />
+    <Content Include="Content\images\Banana.jpg" />
+    <Content Include="Content\images\Cherry.jpg" />
+    <Content Include="Content\images\Grape.jpg" />
+    <Content Include="Content\images\Kiwi.jpg" />
+    <Content Include="Content\images\Lemon.jpg" />
+    <Content Include="Content\images\Mango.jpg" />
+    <Content Include="Content\images\Orange.jpg" />
+    <Content Include="Content\images\Pineapple.jpg" />
+    <Content Include="Content\images\Strawberry.jpg" />
+    <Content Include="Content\images\Watermelon.jpg" />
     <Content Include="Models\dbStoreAzure.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbStoreAzure.edmx</DependentUpon>
@@ -246,6 +251,7 @@
     <Content Include="Models\dbStoreAzure.edmx.diagram">
       <DependentUpon>dbStoreAzure.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Store20240722171913 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -278,7 +284,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\" />
     <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>
