@@ -155,6 +155,21 @@
       <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\dbService.cs" />
+    <Compile Include="Models\dbStore.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbStore.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbStore.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbStore.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbStore.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\dbStoreAzure.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,26 +188,35 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>dbStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tCart.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
+      <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tCartItem.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
+      <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tMembers.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
+      <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrder.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
+      <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrderItem.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
+      <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProducts.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
+      <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vw_GetCartItemQuantity.cs">
-      <DependentUpon>dbStoreAzure.tt</DependentUpon>
+      <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -224,6 +248,16 @@
     <Content Include="Content\images\Pineapple.jpg" />
     <Content Include="Content\images\Strawberry.jpg" />
     <Content Include="Content\images\Watermelon.jpg" />
+    <Content Include="Models\dbStore.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbStore.edmx</DependentUpon>
+      <LastGenOutput>dbStore.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\dbStore.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbStore.edmx</DependentUpon>
+      <LastGenOutput>dbStore.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\dbStoreAzure.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbStoreAzure.edmx</DependentUpon>
@@ -250,6 +284,13 @@
     </EntityDeploy>
     <Content Include="Models\dbStoreAzure.edmx.diagram">
       <DependentUpon>dbStoreAzure.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\dbStore.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbStore.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\dbStore.edmx.diagram">
+      <DependentUpon>dbStore.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Store20240722171913 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

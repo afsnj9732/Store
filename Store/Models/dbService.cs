@@ -12,8 +12,8 @@ namespace Store.Models
 {
     public class dbService
     {
-        dbStoreAzureEntities db = new dbStoreAzureEntities();
-
+        //dbStoreAzureEntities db = new dbStoreAzureEntities();
+        dbStoreEntities db = new dbStoreEntities();
         public int GetProductTotalPage()
         {
             double productCounts = db.tProducts.Count();

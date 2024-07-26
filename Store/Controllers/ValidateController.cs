@@ -38,7 +38,7 @@ namespace Store.Controllers
                 {
                     ViewBag.LoginError = "";
                     Session["memberID"] = loginMemberID;
-                    FormsAuthentication.RedirectFromLoginPage(memberInfo.Email, true);//授權
+                    FormsAuthentication.SetAuthCookie(memberInfo.Email, true);//授權
                     return RedirectToAction("Index", "Main");
                 }
                 else
@@ -92,7 +92,7 @@ namespace Store.Controllers
                     dbService.CreateMember(memberInfo);
                     var loginMemberID = dbService.GetMemberID(memberInfo.Email,memberInfo.Password);
                     Session["memberID"] = loginMemberID;
-                    FormsAuthentication.RedirectFromLoginPage(memberInfo.Email, true);//授權                    
+                    FormsAuthentication.SetAuthCookie(memberInfo.Email, true);//授權                    
                     TempData["Register"] = "註冊成功";
                     return RedirectToAction("Index", "Main");
                 }
