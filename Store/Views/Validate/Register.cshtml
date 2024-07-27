@@ -14,41 +14,41 @@
 {
     <input type="hidden" id="recaptcha" name="recaptchaResponse">
     @Html.AntiForgeryToken()
-
-<div class="container ">
-    <hr />
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="mb-3">
-                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
-            <div class="mb-3">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-            <div class="mb-3">
-                @Html.LabelFor(model => model.ComparePassword, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.ComparePassword, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ComparePassword, "", new { @class = "text-danger" })
-            </div>
-            <div class="mb-3">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-            <div class="mb-3 container p-0 m-0 ">
-                <div>
-                    <input type="submit" value="註冊" class="btn btn-primary" />
+    <div class="container ">
+        <hr />
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "form-label" })
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })*@
                 </div>
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.ComparePassword, htmlAttributes: new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ComparePassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.ValidationMessageFor(model => model.ComparePassword, "", new { @class = "text-danger" })*@
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
+                </div>
+                <div class="mb-3 container p-0 m-0 ">
+                    <div>
+                        <input type="submit" value="註冊" class="btn btn-primary" />
+                    </div>
+                </div>
+                <p style="color:red">@ViewBag.RegisterError</p>
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             </div>
-            <p style="color:red">@ViewBag.RegisterError</p>
         </div>
     </div>
-</div>
-   
-    }
+
+}
 
 

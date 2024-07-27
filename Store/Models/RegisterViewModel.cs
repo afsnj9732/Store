@@ -15,6 +15,7 @@ namespace Store.Models
         [DisplayName("密碼")]
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "請輸入密碼")]
+        [StringLength(16, MinimumLength = 5, ErrorMessage = "密碼長度限制5~16字")]
         public string Password { get; set; }
         [DisplayName("再次確認密碼")]
         [DataType(DataType.Password)]

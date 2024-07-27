@@ -12,28 +12,30 @@
 {
     <input type="hidden" id="recaptcha" name="recaptchaResponse">
     @Html.AntiForgeryToken()
-<div class="container">
+    <div class="container">
 
-    <hr />
-    <div class="mb-3">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label" })
-        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-    </div>
-    <div class="mb-3">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "form-label" })
-        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-    </div>
-    <div class="mb-3 container p-0 m-0 ">
-        <div>
-            <button type="submit" class="btn btn-secondary">登入</button>
-            <button type="button" class="btn btn-primary " onclick="location.href='@Url.Action("Register", "Validate")'">註冊</button>
+        <hr />
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
         </div>
-    </div>
-    <p style="color:red">@ViewBag.LoginError</p>
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
+        </div>
+        <div class="mb-3 container p-0 m-0 ">
+            <div>
+                <button type="submit" class="btn btn-secondary">登入</button>
+                <button type="button" class="btn btn-primary " onclick="location.href='@Url.Action("Register", "Validate")'">註冊</button>
+            </div>
+        </div>
+        <p style="color:red">@ViewBag.LoginError</p>
 
-</div>
+    </div>
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
 }
 
 
