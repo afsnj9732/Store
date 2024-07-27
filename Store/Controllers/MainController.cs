@@ -19,8 +19,11 @@ namespace Store.Controllers
 
         public async Task<ActionResult> Product(int pageNow = 1)
         {
-                var ProductList = await dbService.GetProductList(pageNow);
-                ViewBag.TotalPages = await dbService.GetProductTotalPage();
+            var getProductListAsync =  dbService.GetProductList(pageNow);
+            var getTotalPageAsync     =  dbService.GetProductTotalPage();
+
+            var ProductList = await getProductListAsync;
+            ViewBag.TotalPages = await getTotalPageAsync;
                 return View(ProductList);         
         }
 

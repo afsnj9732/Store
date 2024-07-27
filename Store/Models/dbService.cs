@@ -17,6 +17,7 @@ namespace Store.Models
         dbStoreEntities db = new dbStoreEntities();
         public async Task<int> GetProductTotalPage()
         {
+            dbStoreEntities db = new dbStoreEntities();
             double productCounts = await db.tProducts.CountAsync();
             int totalPage = (int)Math.Ceiling(productCounts / 5);
             return totalPage;
@@ -24,28 +25,25 @@ namespace Store.Models
 
         public async Task<List<tProducts>> GetProductList(int pageNow)
         {
+            dbStoreEntities db = new dbStoreEntities();
             var nowPageProduct = await db.tProducts.OrderBy(m=>m.ProductID)
                 .Skip((pageNow - 1)*5)
                 .Take(5)
                 .ToListAsync();
             return nowPageProduct;
         }
-        public int? GetMemberID(string memberEmail,string memberPassword)
+        public async Task<int?> GetMemberID(string memberEmail,string memberPassword)
         {
-            var target = db.tMembers.Where(m => m.Email == memberEmail && m.Password == memberPassword).FirstOrDefault();
-            if (target != null)
-            {
-                return target.MemberID;
-            }
-            else
-            {
-                return null;
-            }
+            dbStoreEntities db = new dbStoreEntities();
+            var target = await db.tMembers.Where(m => m.Email == memberEmail && m.Password == memberPassword).FirstOrDefaultAsync();
+            return target.MemberID;
+
         }
 
-        public Boolean CheckMemberExist(string memberEmail)
+        public async Task<bool> CheckMemberExist(string memberEmail)
         {
-            var memberExist = db.tMembers.Where(m => m.Email == memberEmail).FirstOrDefault();
+            dbStoreEntities db = new dbStoreEntities();
+            var memberExist = await db.tMembers.Where(m => m.Email == memberEmail).FirstOrDefaultAsync();
             if(memberExist == null)
             {
                 return false;

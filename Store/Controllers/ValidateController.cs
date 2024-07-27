@@ -27,13 +27,17 @@ namespace Store.Controllers
         {
             if (ModelState.IsValid) //資料驗證
             {
-                bool ifCaptcha = await VerifyRecaptcha(memberInfo.recaptchaResponse);
+                var getVerifyRecaptcha =  VerifyRecaptcha(memberInfo.recaptchaResponse);
+                var getMemberID =  dbService.GetMemberID(memberInfo.Email, memberInfo.Password);
+
+                bool ifCaptcha = await getVerifyRecaptcha;
+                int? loginMemberID = await getMemberID;
+
                 if (ifCaptcha == false)
                 {
                     ViewBag.LoginError = "你有點像機器人，請重新嘗試";
                     return View(memberInfo);
                 }
-                var loginMemberID = dbService.GetMemberID(memberInfo.Email,memberInfo.Password);
                 if (loginMemberID != null)
                 {
                     ViewBag.LoginError = "";
@@ -74,13 +78,19 @@ namespace Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool ifCaptcha = await VerifyRecaptcha(memberInfo.recaptchaResponse);
-                if(ifCaptcha == false)
+                var getVerifyRecaptcha = VerifyRecaptcha(memberInfo.recaptchaResponse);
+                var checkMemberExist =  dbService.CheckMemberExist(memberInfo.Email);
+                var getMemberID = dbService.GetMemberID(memberInfo.Email, memberInfo.Password);
+
+                bool ifCaptcha = await getVerifyRecaptcha;
+                bool memberExist = await checkMemberExist;
+                int? loginMemberID = await getMemberID;
+
+                if (ifCaptcha == false)
                 {
                     ViewBag.RegisterError = "你有點像機器人，請重新嘗試";
                     return View(memberInfo);
                 }
-                var memberExist = dbService.CheckMemberExist(memberInfo.Email);
                 if (memberExist)
                 {
                     ViewBag.RegisterError = "Email已註冊";
@@ -90,7 +100,6 @@ namespace Store.Controllers
                 {
                     
                     dbService.CreateMember(memberInfo);
-                    var loginMemberID = dbService.GetMemberID(memberInfo.Email,memberInfo.Password);
                     Session["memberID"] = loginMemberID;
                     FormsAuthentication.SetAuthCookie(memberInfo.Email, true);//授權                    
                     TempData["Register"] = "註冊成功";
