@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Store.Models
@@ -14,19 +15,19 @@ namespace Store.Models
     {
         //dbStoreAzureEntities db = new dbStoreAzureEntities();
         dbStoreEntities db = new dbStoreEntities();
-        public int GetProductTotalPage()
+        public async Task<int> GetProductTotalPage()
         {
-            double productCounts = db.tProducts.Count();
+            double productCounts = await db.tProducts.CountAsync();
             int totalPage = (int)Math.Ceiling(productCounts / 5);
             return totalPage;
         }
 
-        public List<tProducts> GetProductList(int pageNow)
+        public async Task<List<tProducts>> GetProductList(int pageNow)
         {
-            var nowPageProduct = db.tProducts.OrderBy(m=>m.ProductID)
+            var nowPageProduct = await db.tProducts.OrderBy(m=>m.ProductID)
                 .Skip((pageNow - 1)*5)
                 .Take(5)
-                .ToList();
+                .ToListAsync();
             return nowPageProduct;
         }
         public int? GetMemberID(string memberEmail,string memberPassword)

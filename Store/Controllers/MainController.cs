@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,10 +17,10 @@ namespace Store.Controllers
             return View();
         }
 
-        public ActionResult Product(int pageNow = 1)
+        public async Task<ActionResult> Product(int pageNow = 1)
         {
-                var ProductList = dbService.GetProductList(pageNow);
-                ViewBag.TotalPages = dbService.GetProductTotalPage();
+                var ProductList = await dbService.GetProductList(pageNow);
+                ViewBag.TotalPages = await dbService.GetProductTotalPage();
                 return View(ProductList);         
         }
 
