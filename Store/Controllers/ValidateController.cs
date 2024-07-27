@@ -64,7 +64,7 @@ namespace Store.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            Session.Clear();
+            Session.Abandon();
             return RedirectToAction("Login");
         }
 
