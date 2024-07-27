@@ -42,7 +42,7 @@ namespace Store.Controllers
                 {
                     ViewBag.LoginError = "";
                     Session["memberID"] = loginMemberID;
-                    FormsAuthentication.SetAuthCookie(memberInfo.Email, true);//授權
+                    FormsAuthentication.SetAuthCookie(memberInfo.Email, false);//授權
                     return RedirectToAction("Index", "Main");
                 }
                 else
@@ -64,6 +64,7 @@ namespace Store.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            Session.Clear();
             return RedirectToAction("Login");
         }
 

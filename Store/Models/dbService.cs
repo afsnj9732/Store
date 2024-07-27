@@ -17,7 +17,9 @@ namespace Store.Models
         dbStoreEntities db = new dbStoreEntities();
         public async Task<int> GetProductTotalPage()
         {
+            //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
+
             double productCounts = await db.tProducts.CountAsync();
             int totalPage = (int)Math.Ceiling(productCounts / 5);
             return totalPage;
@@ -25,6 +27,7 @@ namespace Store.Models
 
         public async Task<List<tProducts>> GetProductList(int pageNow)
         {
+            //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
             var nowPageProduct = await db.tProducts.OrderBy(m=>m.ProductID)
                 .Skip((pageNow - 1)*5)
@@ -34,6 +37,7 @@ namespace Store.Models
         }
         public async Task<int?> GetMemberID(string memberEmail,string memberPassword)
         {
+            //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
             var target = await db.tMembers.Where(m => m.Email == memberEmail && m.Password == memberPassword).FirstOrDefaultAsync();
             return target.MemberID;
@@ -42,6 +46,7 @@ namespace Store.Models
 
         public async Task<bool> CheckMemberExist(string memberEmail)
         {
+            //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
             var memberExist = await db.tMembers.Where(m => m.Email == memberEmail).FirstOrDefaultAsync();
             if(memberExist == null)
@@ -168,13 +173,17 @@ namespace Store.Models
             {
                 var target = db.tCart.Where(m => m.CartID == cartID).FirstOrDefault();
                 var targetItems = db.tCartItem.Where(m => m.tCart.CartID == cartID).ToList();
+                //轉換成台灣時區
+                DateTime utcTimeNow = DateTime.UtcNow;
+                TimeZoneInfo twTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+                DateTime twTime = TimeZoneInfo.ConvertTimeFromUtc(utcTimeNow, twTimeZone);
 
                 if (target != null && targetItems.Any())
                 {
                     tOrder tempOrder = new tOrder();
                     tempOrder.MemberID = target.MemberID;
                     tempOrder.TotalPrice = 0;
-                    tempOrder.OrderDate = DateTime.Now;
+                    tempOrder.OrderDate = twTime;
                     db.tOrder.Add(tempOrder);
                     db.SaveChanges();
                     //先將訂單建立，再回頭修改TotalPrice
