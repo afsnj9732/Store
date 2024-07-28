@@ -2,7 +2,9 @@
 
     簡易介紹:
 
-    使用 ASP.NET MVC 和 Microsoft SQL Server 撰寫的全端購物商城網站，專案和資料庫分別都部署在Azure，各項功能初次運行可能較慢
+    使用 ASP.NET MVC 和 Microsoft SQL Server 撰寫的全端購物商城網站
+    
+    專案和資料庫分別都部署在Azure，各項功能初次運行可能較慢
 
     網站限制   未登入取得ASP.NET授權的狀態下僅能 瀏覽首頁、瀏覽商品列表、註冊會員
 
