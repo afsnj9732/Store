@@ -198,25 +198,25 @@
       <DependentUpon>dbStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tCart.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tCartItem.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tMembers.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrder.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrderItem.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProducts.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vw_GetCartItemQuantity.cs">
-      <DependentUpon>dbStore.tt</DependentUpon>
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -278,19 +278,19 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\dbStoreAzure.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbStoreAzure.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\dbStoreAzure.edmx.diagram">
-      <DependentUpon>dbStoreAzure.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\dbStore.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>dbStore.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\dbStore.edmx.diagram">
       <DependentUpon>dbStore.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\dbStoreAzure.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbStoreAzure.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\dbStoreAzure.edmx.diagram">
+      <DependentUpon>dbStoreAzure.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Store20240722171913 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
