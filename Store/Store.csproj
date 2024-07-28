@@ -186,6 +186,7 @@
       <DependentUpon>dbStoreAzure.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\reCAPTCHAService.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
