@@ -40,8 +40,15 @@ namespace Store.Models
             //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
             var target = await db.tMembers.Where(m => m.Email == memberEmail && m.Password == memberPassword).FirstOrDefaultAsync();
-            return target.MemberID;
-
+            if (target != null)
+            {
+                return target.MemberID;
+            }
+            else
+            {
+                return null; //雖然int?讓回傳值可為null
+                             //但調用target.MemberId時，若target為null則會報錯
+            }
         }
 
         public async Task<bool> CheckMemberExist(string memberEmail)
@@ -68,8 +75,7 @@ namespace Store.Models
             db.Database.ExecuteSqlCommand("EXEC dbo.usp_CreateMember @Email, @UserName, @Password",
                 new SqlParameter("Email", email),
                 new SqlParameter("UserName", userName),
-                new SqlParameter("Password", password) 
-            );
+                new SqlParameter("Password", password));
             //tMembers newMember = new tMembers();
             //newMember.Email = memberInfo.Email;
             //newMember.UserName = memberInfo.UserName;

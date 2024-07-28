@@ -82,11 +82,9 @@ namespace Store.Controllers
             {
                 var getVerifyRecaptcha = reCAPTCHAService.VerifyRecaptcha(memberInfo.recaptchaResponse);
                 var checkMemberExist =  dbService.CheckMemberExist(memberInfo.Email);
-                var getMemberID = dbService.GetMemberID(memberInfo.Email, memberInfo.Password);
 
                 bool ifCaptcha = await getVerifyRecaptcha;
                 bool memberExist = await checkMemberExist;
-                int? loginMemberID = await getMemberID;
 
                 if (ifCaptcha == false)
                 {
@@ -99,9 +97,9 @@ namespace Store.Controllers
                     return View(memberInfo);
                 }
                 else
-                {
-                    
+                {                   
                     dbService.CreateMember(memberInfo);
+                    int? loginMemberID = await dbService.GetMemberID(memberInfo.Email, memberInfo.Password);
                     Session["memberID"] = loginMemberID;
                     FormsAuthentication.SetAuthCookie(memberInfo.Email, true);//授權                    
                     TempData["Register"] = "註冊成功";
