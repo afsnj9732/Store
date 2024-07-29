@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Store.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string secretKey = "6LdoNBIqAAAAAFxAgPvrGLf-Li4IYWfkRl9mki3P";
+                    string secretKey = ConfigurationManager.AppSettings["reCaptchaSK"]; ;
                     var url = "https://www.google.com/recaptcha/api/siteverify" +
                         "?secret=" + secretKey + "&response=" + recaptchaResponse;
                     var response = await client.PostAsync(url, null);

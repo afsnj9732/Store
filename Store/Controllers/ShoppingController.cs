@@ -2,6 +2,7 @@
 using Stripe;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -79,7 +80,7 @@ namespace Store.Controllers
         {
             int newOrderID = dbService.CreateOrder(cartID);  
             int orderPrice = dbService.GetOrderPrice(newOrderID);
-            StripeConfiguration.ApiKey = "sk_test_51Pesm02La0H5PIYu13IyQZhzBEoV4xiuU2DY225yu7pZOezKhR1NU1bULY5KLm2CN6b1JzfmZK4SuFfDhIyQ8yHx00oqPP1pYF";
+            StripeConfiguration.ApiKey = ConfigurationManager.AppSettings["stripeSK"];
             var options = new ChargeCreateOptions
             {
                 Amount = orderPrice*100, 
