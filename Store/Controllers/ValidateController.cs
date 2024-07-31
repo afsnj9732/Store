@@ -32,13 +32,15 @@ namespace Store.Controllers
                 var getMemberID =  dbService.GetMemberID(memberInfo.Email, memberInfo.Password);
 
                 bool ifCaptcha = await getVerifyRecaptcha;
-                int? loginMemberID = await getMemberID;
 
                 if (ifCaptcha == false)
                 {
                     ViewBag.LoginError = "你有點像機器人，請重新嘗試";
                     return View(memberInfo);
                 }
+
+                int? loginMemberID = await getMemberID;
+
                 if (loginMemberID != null)
                 {
                     ViewBag.LoginError = "";
@@ -84,13 +86,15 @@ namespace Store.Controllers
                 var checkMemberExist =  dbService.CheckMemberExist(memberInfo.Email);
 
                 bool ifCaptcha = await getVerifyRecaptcha;
-                bool memberExist = await checkMemberExist;
 
                 if (ifCaptcha == false)
                 {
                     ViewBag.RegisterError = "你有點像機器人，請重新嘗試";
                     return View(memberInfo);
                 }
+
+                bool memberExist = await checkMemberExist;
+
                 if (memberExist)
                 {
                     ViewBag.RegisterError = "Email已註冊";

@@ -92,8 +92,11 @@ function AddCart(listID) {
 function PostAntiToken() {
     var token = document.querySelector('input[name="__RequestVerificationToken"]').value;
     var form = document.querySelector('form');   
+    if (form != null) {
     var formTokenInput = document.getElementById('AntiToken');
     formTokenInput.value = token;
+    }
+
 }
 
 
