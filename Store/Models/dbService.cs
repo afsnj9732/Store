@@ -15,7 +15,7 @@ namespace Store.Models
     {
         //dbStoreAzureEntities db = new dbStoreAzureEntities();
         dbStoreEntities db = new dbStoreEntities();
-        public async Task<int> GetProductTotalPage()
+        public async Task<int> GetProductTotalPage()//改預存
         {
             //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
@@ -25,7 +25,7 @@ namespace Store.Models
             return totalPage;
         }
 
-        public async Task<List<tProducts>> GetProductList(int pageNow)
+        public async Task<List<tProducts>> GetProductList(int pageNow)//改預存
         {
             //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
@@ -84,7 +84,7 @@ namespace Store.Models
             //db.SaveChanges();           
         }
 
-        public int? GetCartItemQuantity(int loginMemberID)
+        public int? GetCartItemQuantity(int loginMemberID)//改預存
         {
             int? ItemQuantity = db.vw_GetCartItemQuantity
                 .Where(m => m.MemberID == loginMemberID).Select(m => m.TotalQuantity).FirstOrDefault();

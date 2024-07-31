@@ -13,7 +13,7 @@
 @using (Html.BeginForm("Register", "Validate", FormMethod.Post))
 {
     <input type="hidden" id="recaptcha" name="recaptchaResponse">
-    @Html.AntiForgeryToken()
+    <input type="hidden" id="AntiToken" name="__RequestVerificationToken" />
     <div class="container ">
         <hr />
         <div class="row justify-content-center">

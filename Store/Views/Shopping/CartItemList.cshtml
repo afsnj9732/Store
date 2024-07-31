@@ -49,21 +49,21 @@
     {
         using (Html.BeginForm("PlaceOrder", "Shopping", FormMethod.Post))
         {
-            @Html.AntiForgeryToken()
+            <input type="hidden" id="AntiToken" name="__RequestVerificationToken" />
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="@ViewBag.StripePublicKey"
                     data-amount="@(Price*100)"
                     data-name="Store網站_金流API測試"
-                    data-description="測試卡號4242 4242 4242 4242" 
+                    data-description="測試卡號4242 4242 4242 4242"
                     data-image="https://yourwebsite.com/logo.png"
                     data-currency="twd"
                     data-locale="auto"
                     data-label="訂購">
             </script>
-        <input type="hidden" name="cartID" value="@Model.FirstOrDefault().CartID" />
+            <input type="hidden" name="cartID" value="@Model.FirstOrDefault().CartID" />
 
-            }
         }
+    }
 }
 
 
