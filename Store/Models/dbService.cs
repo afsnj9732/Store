@@ -93,10 +93,9 @@ namespace Store.Models
         public int? GetCartItemQuantity(int loginMemberID)
         {
             var memberIdParam = new SqlParameter("@MemberID", loginMemberID);
-            var itemQuantity =  db.Database.SqlQuery<int>(
+            var itemQuantity =  db.Database.SqlQuery<int?>(
     "EXEC usp_GetTotalQuantityByMemberID @MemberID", memberIdParam)
     .SingleOrDefault();
-
 
             //int? ItemQuantity = db.vw_GetCartItemQuantity
             //.Where(m => m.MemberID == loginMemberID).Select(m => m.TotalQuantity).FirstOrDefault();
