@@ -52,5 +52,23 @@ namespace Store.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_CreateMember", emailParameter, userNameParameter, passwordParameter);
         }
+    
+        public virtual ObjectResult<usp_GetProductListByPageNow_Result> usp_GetProductListByPageNow(Nullable<int> pageNow)
+        {
+            var pageNowParameter = pageNow.HasValue ?
+                new ObjectParameter("PageNow", pageNow) :
+                new ObjectParameter("PageNow", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetProductListByPageNow_Result>("usp_GetProductListByPageNow", pageNowParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> usp_GetTotalQuantityByMemberID(Nullable<int> memberID)
+        {
+            var memberIDParameter = memberID.HasValue ?
+                new ObjectParameter("MemberID", memberID) :
+                new ObjectParameter("MemberID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_GetTotalQuantityByMemberID", memberIDParameter);
+        }
     }
 }

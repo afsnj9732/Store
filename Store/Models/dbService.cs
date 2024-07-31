@@ -1,4 +1,5 @@
-﻿using Stripe.BillingPortal;
+﻿using Microsoft.Ajax.Utilities;
+using Stripe.BillingPortal;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Web;
+using WebGrease.Css.Ast;
 
 namespace Store.Models
 {
@@ -15,7 +17,7 @@ namespace Store.Models
     {
         //dbStoreAzureEntities db = new dbStoreAzureEntities();
         dbStoreEntities db = new dbStoreEntities();
-        public async Task<int> GetProductTotalPage()//改預存
+        public async Task<int> GetProductTotalPage()
         {
             //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
@@ -25,14 +27,18 @@ namespace Store.Models
             return totalPage;
         }
 
-        public async Task<List<tProducts>> GetProductList(int pageNow)//改預存
+        public async Task<List<tProducts>> GetProductList(int pageNow)
         {
             //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
-            var nowPageProduct = await db.tProducts.OrderBy(m=>m.ProductID)
-                .Skip((pageNow - 1)*5)
-                .Take(5)
+            var pageNowParam = new SqlParameter("@PageNow", pageNow);
+            var nowPageProduct = await db.Database.SqlQuery<tProducts>(
+                "EXEC usp_GetProductListByPageNow @PageNow", pageNowParam)
                 .ToListAsync();
+            //var nowPageProduct = await db.tProducts.OrderBy(m=>m.ProductID)
+            //    .Skip((pageNow - 1)*5)
+            //    .Take(5)
+            //    .ToListAsync();
             return nowPageProduct;
         }
         public async Task<int?> GetMemberID(string memberEmail,string memberPassword)
@@ -84,10 +90,16 @@ namespace Store.Models
             //db.SaveChanges();           
         }
 
-        public int? GetCartItemQuantity(int loginMemberID)//改預存
+        public int? GetCartItemQuantity(int loginMemberID)
         {
-            int? ItemQuantity = db.vw_GetCartItemQuantity
-                .Where(m => m.MemberID == loginMemberID).Select(m => m.TotalQuantity).FirstOrDefault();
+            var memberIdParam = new SqlParameter("@MemberID", loginMemberID);
+            var itemQuantity =  db.Database.SqlQuery<int>(
+    "EXEC usp_GetTotalQuantityByMemberID @MemberID", memberIdParam)
+    .SingleOrDefault();
+
+
+            //int? ItemQuantity = db.vw_GetCartItemQuantity
+            //.Where(m => m.MemberID == loginMemberID).Select(m => m.TotalQuantity).FirstOrDefault();
             //int?表示可為null
 
             //var targetCart = db.tCart.Where(m => m.MemberID == loginMemberID).FirstOrDefault();
@@ -96,7 +108,7 @@ namespace Store.Models
             //{
             //    targetItemQuantity += item.Quantity;
             //}
-            return ItemQuantity;
+            return itemQuantity;
         }
 
         public void AddCartItem(int loginMemberID, int addProductID)

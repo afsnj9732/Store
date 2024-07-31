@@ -216,6 +216,9 @@
     <Compile Include="Models\tProducts.cs">
       <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\usp_GetProductListByPageNow_Result.cs">
+      <DependentUpon>dbStoreAzure.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\vw_GetCartItemQuantity.cs">
       <DependentUpon>dbStoreAzure.tt</DependentUpon>
     </Compile>

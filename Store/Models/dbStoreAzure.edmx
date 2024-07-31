@@ -162,6 +162,12 @@
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="usp_GetProductListByPageNow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PageNow" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GetTotalQuantityByMemberID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MemberID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="dbStoreAzureModelStoreContainer">
           <EntitySet Name="tCart" EntityType="Self.tCart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tCartItem" EntityType="Self.tCartItem" Schema="dbo" store:Type="Tables" />
@@ -413,7 +419,20 @@
             <Parameter Name="UserName" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="usp_GetProductListByPageNow" ReturnType="Collection(dbStoreAzureModel.usp_GetProductListByPageNow_Result)">
+            <Parameter Name="PageNow" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetTotalQuantityByMemberID" ReturnType="Collection(Int32)">
+            <Parameter Name="MemberID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="usp_GetProductListByPageNow_Result">
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Price" Nullable="false" />
+          <Property Type="String" Name="ImageURL" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -500,6 +519,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_CreateMember" FunctionName="dbStoreAzureModel.Store.usp_CreateMember" />
+          <FunctionImportMapping FunctionImportName="usp_GetProductListByPageNow" FunctionName="dbStoreAzureModel.Store.usp_GetProductListByPageNow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbStoreAzureModel.usp_GetProductListByPageNow_Result">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetTotalQuantityByMemberID" FunctionName="dbStoreAzureModel.Store.usp_GetTotalQuantityByMemberID" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
