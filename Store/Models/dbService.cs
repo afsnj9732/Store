@@ -3,6 +3,7 @@ using Stripe.BillingPortal;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Drawing.Printing;
 using System.Linq;
@@ -41,20 +42,21 @@ namespace Store.Models
             //    .ToListAsync();
             return nowPageProduct;
         }
-        public async Task<int?> GetMemberID(string memberEmail,string memberPassword)
+        public async Task<int?> GetMemberID(string memberEmail, string memberPassword)
         {
             //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
-            var target = await db.tMembers.Where(m => m.Email == memberEmail && m.Password == memberPassword).FirstOrDefaultAsync();
-            if (target != null)
+            //var target = await db.tMembers.Where(m => m.Email == memberEmail && m.Password == memberPassword).FirstOrDefaultAsync();
+            var target = await db.tMembers.Where(m => m.Email == memberEmail).Select(m => new { m.MemberID, m.Password }).FirstOrDefaultAsync();
+            var test = BCrypt.Net.BCrypt.Verify(memberPassword, target.Password);
+            if (target != null && BCrypt.Net.BCrypt.Verify(memberPassword, target.Password))
             {
                 return target.MemberID;
             }
-            else
-            {
-                return null; //雖然int?讓回傳值可為null
-                             //但調用target.MemberId時，若target為null則會報錯
-            }
+
+            return null; //雖然int?讓回傳值可為null
+                         //但調用target.MemberId時，若target為null則會報錯
+
         }
 
         public async Task<bool> CheckMemberExist(string memberEmail)
@@ -62,7 +64,7 @@ namespace Store.Models
             //dbStoreAzureEntities db = new dbStoreAzureEntities();
             dbStoreEntities db = new dbStoreEntities();
             var memberExist = await db.tMembers.Where(m => m.Email == memberEmail).FirstOrDefaultAsync();
-            if(memberExist == null)
+            if (memberExist == null)
             {
                 return false;
             }
@@ -76,7 +78,7 @@ namespace Store.Models
         {
             string email = memberInfo.Email;
             string userName = memberInfo.UserName;
-            string password = memberInfo.Password;
+            string password = BCrypt.Net.BCrypt.HashPassword(memberInfo.Password);
 
             db.Database.ExecuteSqlCommand("EXEC dbo.usp_CreateMember @Email, @UserName, @Password",
                 new SqlParameter("Email", email),
@@ -93,7 +95,7 @@ namespace Store.Models
         public int? GetCartItemQuantity(int loginMemberID)
         {
             var memberIdParam = new SqlParameter("@MemberID", loginMemberID);
-            var itemQuantity =  db.Database.SqlQuery<int?>(
+            var itemQuantity = db.Database.SqlQuery<int?>(
     "EXEC usp_GetTotalQuantityByMemberID @MemberID", memberIdParam)
     .SingleOrDefault();
 
@@ -185,7 +187,7 @@ namespace Store.Models
         {
             var transaction = db.Database.BeginTransaction();
             //Transaction衝突防止
-            int newOrderID =0;
+            int newOrderID = 0;
             try
             {
                 var target = db.tCart.Where(m => m.CartID == cartID).FirstOrDefault();
@@ -216,7 +218,7 @@ namespace Store.Models
                         db.tOrderItem.Add(tempOrderItem);
                         tempOrder.TotalPrice += item.tProducts.Price * item.Quantity;
                     }
-                    
+
                     //清空購物車
                     db.tCartItem.RemoveRange(targetItems);
                     db.SaveChanges();
@@ -238,7 +240,7 @@ namespace Store.Models
 
         public int GetOrderPrice(int orderID)
         {
-            return db.tOrder.Where(m=>m.OrderID == orderID).FirstOrDefault().TotalPrice;
+            return db.tOrder.Where(m => m.OrderID == orderID).FirstOrDefault().TotalPrice;
         }
 
     }
