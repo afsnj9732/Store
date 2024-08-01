@@ -48,7 +48,6 @@ namespace Store.Models
             dbStoreEntities db = new dbStoreEntities();
             //var target = await db.tMembers.Where(m => m.Email == memberEmail && m.Password == memberPassword).FirstOrDefaultAsync();
             var target = await db.tMembers.Where(m => m.Email == memberEmail).Select(m => new { m.MemberID, m.Password }).FirstOrDefaultAsync();
-            var test = BCrypt.Net.BCrypt.Verify(memberPassword, target.Password);
             if (target != null && BCrypt.Net.BCrypt.Verify(memberPassword, target.Password))
             {
                 return target.MemberID;

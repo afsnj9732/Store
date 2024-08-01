@@ -16,8 +16,8 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
+            <div class="container collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1 col">
                     <li>@Html.ActionLink("首頁", "Index", "Main", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("商品", "Product", "Main", new { area = "" }, new { @class = "nav-link" })</li>
                     @if (User.Identity.IsAuthenticated)
@@ -38,8 +38,11 @@
                     {
                         <li>@Html.ActionLink("登入", "Login", "Validate", new { area = "" }, new { @class = "nav-link" })</li>
                     }
-                    <li><a href="https://github.com/afsnj9732/Store" class = "nav-link" target="_blank">GitHub</a></li>
                 </ul>
+                <ul class="navbar-nav flex-grow-1 col justify-content-end">
+                    <li><a href="https://github.com/afsnj9732/Store" class="nav-link" target="_blank">GitHub</a></li>
+
+                </ul>        
             </div>
         </div>
     </nav>
