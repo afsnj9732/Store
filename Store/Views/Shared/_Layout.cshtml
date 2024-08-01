@@ -26,10 +26,11 @@
                         <li>@Html.ActionLink("登出", "Logout", "Validate", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>
                             @Html.ActionLink("購物車", "CartItemList", "Shopping", new { area = "" }, new { @class = "nav-link" })
+                        </li>
                         <li>
                             <button id="cartItemsQuantity" type="button" class="btn btn-warning"></button>
                         </li>
-                        </li>
+
                         <li>@Html.ActionLink("我的訂單", "OrderList", "Shopping", new { area = "" }, new { @class = "nav-link" })</li>
 
                     }
