@@ -48,9 +48,16 @@ namespace Store.Models
             dbStoreEntities db = new dbStoreEntities();
             //var target = await db.tMembers.Where(m => m.Email == memberEmail && m.Password == memberPassword).FirstOrDefaultAsync();
             var target = await db.tMembers.Where(m => m.Email == memberEmail).Select(m => new { m.MemberID, m.Password }).FirstOrDefaultAsync();
-            if (target != null && BCrypt.Net.BCrypt.Verify(memberPassword, target.Password))
+            try
             {
-                return target.MemberID;
+                if (target != null && BCrypt.Net.BCrypt.Verify(memberPassword, target.Password))
+                {
+                    return target.MemberID;
+                }
+            }
+            catch (Exception)
+            {
+                return null; //舊會員密碼不符hash格式
             }
 
             return null; //雖然int?讓回傳值可為null
